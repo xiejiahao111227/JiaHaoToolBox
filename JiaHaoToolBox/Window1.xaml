@@ -42,7 +42,7 @@
             <Border
                 Height="30"
                 VerticalAlignment="Top"
-                Background="#FFB876DD"
+                Background="#FF4A90E2"
                 CornerRadius="20,20,0,0"
                 MouseLeftButtonDown="Border_MouseLeftButtonDown" Grid.ColumnSpan="2" Margin="0,0,200,0">
                 <Grid>
@@ -128,16 +128,16 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="测试版 V1.2  OS1.0.2.0.UMNMIXM" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="正式版 V1.5  OS1.0.5.0.UMNMIXM" VerticalAlignment="Top" Foreground="White"/>
                 </Grid>
             </Border>
             <!-- 预留内容区，保持空白 -->
             <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="598" Margin="0,35,0,0" Grid.RowSpan="2" >
                 <TextBlock HorizontalAlignment="Left" Margin="75,62,0,0" TextWrapping="Wrap" Text="网络调试端口：" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="PortTextBox" HorizontalAlignment="Left" Margin="187,58,0,0" TextWrapping="Wrap" Text="5555" VerticalAlignment="Top" Width="206" RenderTransformOrigin="0.561,0.571" FontSize="14" BorderBrush="#FFED9AEF"/>
+                <TextBox x:Name="PortTextBox" HorizontalAlignment="Left" Margin="187,58,0,0" TextWrapping="Wrap" Text="5555" VerticalAlignment="Top" Width="206" RenderTransformOrigin="0.561,0.571" FontSize="14" BorderBrush="#FF9AB9EF"/>
                 <TextBlock HorizontalAlignment="Left" Margin="66,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Text="WiFi IPV4地址："/>
-                <TextBox x:Name="IpTextBox" HorizontalAlignment="Left" Margin="187,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" FontSize="14" BorderBrush="#FFED9AEF"/>
-                <Button x:Name="WiredToWirelessButton" Click="WiredToWirelessButton_Click" Content="有线转无线连接" HorizontalAlignment="Left" Margin="408,104,0,0" VerticalAlignment="Top" Width="137" Height="32" Background="#FFF0BCF1" BorderBrush="#FFED9AEF" RenderTransformOrigin="0.5,0.5" Foreground="White">
+                <TextBox x:Name="IpTextBox" HorizontalAlignment="Left" Margin="187,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" FontSize="14" BorderBrush="#FF9AB9EF"/>
+                <Button x:Name="WiredToWirelessButton" Click="WiredToWirelessButton_Click" Content="有线转无线连接" HorizontalAlignment="Left" Margin="408,104,0,0" VerticalAlignment="Top" Width="137" Height="32" Background="#FFBCCFF1" BorderBrush="#FF9AB9EF" RenderTransformOrigin="0.5,0.5" Foreground="White">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

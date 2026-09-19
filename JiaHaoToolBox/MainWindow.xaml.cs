@@ -954,6 +954,8 @@ namespace WpfApp1
             // 初始化所有分区集合
             allPartitions = new ObservableCollection<PartitionInfo>();
             InitializeComponent();
+            RestoreGlassTheme();
+            GlassMotion.RegisterGlobalButtonMotion();
             allPartitions.CollectionChanged += AllPartitions_CollectionChanged;
             UpdatePartitionSelectionSummary();
             InitializeAutoRootModeUiState();
@@ -13964,11 +13966,12 @@ public partial class MainWindow : Window
             OpenUpstreamDoc("https://violettool.top/tutorials/connect.html", "已打开上游连接指南页面");
         }
 
-        private void JoinQQGroupButton_Click(object sender, RoutedEventArgs e)
+        private void VersionBadgeButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenUpstreamDoc(
-                "https://qun.qq.com/universal-share/share?ac=1&authKey=0%2FYo9g8At%2BoIzEUeWHD8tfpvheTN1pl0WOB3d1%2F8s44oY8R46Dh1pqutgsCRujMC&busi_data=eyJncm91cENvZGUiOiIxNTk5NzI5NTMiLCJ0b2tlbiI6Ikptcnkrb1ZONUhxQXJzQitjVHNZMGRQZVJJM29sMmdZNXJpcXZJc21ZRU9qZHorNUE1V0owQ2E2ZXZwSU9ieDQiLCJ1aW4iOiIxMjI3MzYzMzQyIn0%3D&data=XJNVJexYjP62pdpl2XDhWErxIhCBqYk2NE3CSNiRmZy5v9PcLijj2T86aWtX5Wf8FRXlb4ma8yEnVOkzVIkjYw&svctype=4&tempid=h5_group_info",
-                "已打开上游 QQ 群分享页");
+            if (AboutToolButton == null) return;
+            ClearOtherSideMenuItemsSelection(AboutToolButton);
+            AboutToolButton.IsSelected = true;
+            AboutToolButton_Click(this, null);
         }
 
         private void OpenUpstreamDoc(string url, string successMessage)

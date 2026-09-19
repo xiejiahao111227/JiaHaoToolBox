@@ -216,13 +216,13 @@ namespace test1
                 ChargeLevelFill.Width = targetWidth;
             }
 
-            // 根据电量百分比更新填充颜色：<10% 红，10%-20% 黄，>20% #FFB876DD
+            // 根据电量百分比更新填充颜色：<10% 红，10%-20% 黄，>20% #FF4A90E2
             if (percentage < 0.10)
                 ChargeLevelFill.Fill = new SolidColorBrush(Colors.Red);
             else if (percentage < 0.20)
                 ChargeLevelFill.Fill = new SolidColorBrush(Colors.Yellow);
             else
-                ChargeLevelFill.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFB876DD"));
+                ChargeLevelFill.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4A90E2"));
 
             // 更新中央信息文本（百分比 + 温度）
             UpdateCenterText(percentage);

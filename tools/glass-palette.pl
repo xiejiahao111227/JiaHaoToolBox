@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+# 液态玻璃配色迁移用的颜色分类表，glass-setters.pl 依赖它。
+use strict;
+use warnings;
+no warnings 'qw';    # 颜色常量以 # 开头，qw 会误报注释
+
+sub glass_palette {
+    my @near_white = qw(#FFFFFFFF #FFFFFF White #FFF8FAFD #FFF7F8FC #FFF6F8FA #FFFAFBFD #FFF1F3F7
+                        #FFF0F0F0 #F8F9FA #FFFBFCFE #FFF5F8FC #FFF4F9FD #FFFAFCFE #FFFAFBFC #FFFEFEFE #FFF3F4F8
+                        #FFEEF3F9 #FFF8F9FA #FFF7F9FC #FFEFEFF3);
+    my @gray_fill  = qw(#FFD0D7DE #FFB8C2CC #FFE8EAEE #FFD9D9D9);
+    my @btn_blue   = qw(#FFBCD8F5 #FFA7D3F6 #FF9ABEE4 #FF9AC5F3 #FFA4C9FF #FF8BD5FF #FFC3D9F5 #FFAECEFF
+                        #FF4A90E2 #FF54AEFF #FF67C0E4 #FFDDF4FF);
+    my @blue_chip  = qw(#FFBCD8F5 #FFA7D3F6 #FF9ABEE4 #FF9AC5F3 #FFC3D9F5 #FFAECEFF #FFA4C9FF #FFDDF4FF #FFEAF3FD #FFF1F7FD);
+    my @gray_border = qw(#FFE0E0E0 #FFE6E6E6 #FFE6ECF3 #FFDDE2EA #FFD8D8D8 #FFDCE1E8 #FFE7E9EF #FFD8DEE8
+                         #FFD0D7DE #FFE2E6ED #FFDCE3EC #FFCFD1D1 #FFDFDFE0 #FFE5E9EE #E0E0E0 #FFCFD8E3
+                         #FFE0E6ED #FFB8C2CC #FFE4E8EF #FFDDE3EA #FFC9DBEC);
+    my @blue_border = qw(#FFBCD8F5 #FFA7D3F6 #FF9ABEE4 #FFD4E5F6 #FFD9E4EF #FFECF5FF #FFA4C9FF #66D8DEE8 #20A8C5EF);
+    my @dark_text   = qw(#FF333333 #FF334155 #FF1F2328 #FF1F1F1F #FF2F3A45 #FF444444 #FF1E293B #FF3E4852
+                         #FF1A1A1A #FF222222 #333333 #333 #FF555555 #FF030914 #FF2B2B2B Black #FF000000 #000000
+                         #FF656D76 #FF263142 #FF3B4651 #FF293642 #FF465362);
+    my @mid_text    = qw(#FF64748B #FF94A3B8 #FF475569 #FF666666 #666666 #FF7E8A97 #FF7A7A7A
+                         #FF6D7885 #FF586A7D #718096 #475569 #FF8A949E #FF6C757D #FF8A97A5 #FF777777 #FF999999 #999999 Gray
+                         #FF52606D #FF7A8793 #FF9AA6B2 #FF9AA4AE #FF98A2AF #FF6F7B87);
+    my @blue_text   = qw(#FF4C9DD4 #FF4A90E2 #FF2196F3 #FF1E90FF #FF2E7CD6 #FF275FB0 #FF4C97D7 #FF4893C3
+                         #FF3774CC #FF1BA3F5 #FF0969DA #FF5896D8 #FF2A84C9 #FF246FA8 #FF1F6DA8 #FF2563EB);
+    return (\@near_white, \@blue_chip, \@gray_fill, \@btn_blue, \@gray_border, \@blue_border, \@dark_text, \@mid_text, \@blue_text);
+}
+
+1;

@@ -3,14 +3,14 @@
 ; 与 WiX 版 MSI 的区别：PrivilegesRequired=lowest，全程不碰 C:\WINDOWS\Installer，
 ; 在本机这种受限的管理员令牌下也能直接双击安装。
 #define MyAppName "嘉豪工具箱"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.5.0"
 #define MyAppExeName "JiaHaoToolBox.exe"
 
 [Setup]
 AppId={{7F3D1C94-2B6E-4A58-9C07-D5E8A1F4B620}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-AppVerName={#MyAppName} 测试版 V1.2 (OS1.0.2.0.UMNMIXM)
+AppVerName={#MyAppName} 正式版 V1.5 (OS1.0.5.0.UMNMIXM)
 AppPublisher={#MyAppName}
 AppPublisherURL=https://github.com/Smart-Paocai/VioletToolBox
 AppSupportURL=https://github.com/Smart-Paocai/VioletToolBox
@@ -22,8 +22,8 @@ LicenseFile=license.rtf
 OutputDir=..\out
 OutputBaseFilename=JiaHaoToolBox-Setup-{#MyAppVersion}
 SetupIconFile=..\JiaHaoToolBox\JiaHaoToolBox.ico
-VersionInfoVersion=1.2.0
-VersionInfoProductVersion=1.2.0
+VersionInfoVersion=1.5.0
+VersionInfoProductVersion=1.5.0
 Compression=lzma2/max
 SolidCompression=yes
 LZMAUseSeparateProcess=yes
@@ -45,7 +45,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Comment: "测试版 V1.2 / OS1.0.2.0.UMNMIXM"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Comment: "正式版 V1.5 / OS1.0.5.0.UMNMIXM"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]

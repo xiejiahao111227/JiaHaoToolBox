@@ -17,7 +17,9 @@
 | 启动计数上报 | 移除。原实现每次启动向 `violettool.top/web-api/open-count/increment` POST 一次，会污染原作者的统计数据 |
 | 关于页面 | 重写为来源归属 + 许可证说明；上游作者头像、收款码与 B 站 / 抖音 / Telegram 入口全部保留，但逐项标注"属于上游原作者，本修改版与其无隶属或背书关系"，并保留上游代码贡献者鸣谢与开源项目列表 |
 | 上游多语 README | 删除 `docs/` 下六份翻译文档，其内容描述上游完整版功能集，与本仓库实际状态不符 |
-| 版本号 | 徽章改为 `测试版 V1.2`，其下新增上游格式的机型版本串 `OS1.0.2.0.UMNMIXM`；程序集 `Version=1.2.0`、`InformationalVersion=1.2.0-TEST+OS1.0.2.0.UMNMIXM` |
+| 版本号 | 徽章为 `正式版 V1.5`，其下是上游格式的机型版本串 `OS1.0.5.0.UMNMIXM`；程序集 `Version=1.5.0`、`InformationalVersion=1.5.0+OS1.0.5.0.UMNMIXM` |
+| 主题色 | 由上游紫色系改为蓝色：主色 `#FF2E7CD6`、强调色 `#FF4A90E2`，其余紫/品红按 HSL 色相旋转到 200°–230° 区间，明度与透明度保持不变（涉及 `MainWindow.xaml` / `Window1.xaml` / `HorizontalBattery.xaml` / `App.xaml` 与 `HorizontalBattery.xaml.cs`，共 130 余处色值） |
+| 版本号徽章点击 | 原实现点击徽章打开上游 QQ 群分享页（`JoinQQGroupButton_Click`），已改为跳转本工具「关于」页（`VersionBadgeButton_Click`），控件更名为 `VersionBadgeButton`，`oujiaflash.cs` 刷写日志里的版本取值同步改名。本仓库不再有任何指向上游 QQ 群的入口 |
 | 侧边栏导航 | `hc:SideMenu` 的 `ExpandMode` 由 `Freedom` 改为 `ShowAll` 并常驻展开（配 `NavTopItemStyle` / `NavLeafItemStyle` 收紧行高，22 行一屏显示）。上游分组折叠依赖 `SideMenuItem.IsSelected`，启动时只有一处伪造点击展开"刷写功能"，其余分组永远点不开；同时删除三段绑定到 HandyControl 3.5.1 中并不存在的 `IsExpanded` 的箭头触发器 |
 | 安装包 | 新增 WiX MSI 与 Inno Setup EXE 两套每用户安装包，见「打包」 |
 | 启动耗时 | 图标改为构建期预转换的矢量资源，并去掉启动遮罩里的人为等待，冷启动约 4.1 秒降到 1.5 秒，见「图标与启动性能」 |
@@ -75,6 +77,14 @@ dotnet publish JiaHaoToolBox/JiaHaoToolBox.csproj -c Release -r win-x64 --self-c
 
 程序运行依赖 `platform-tools`（adb / fastboot）、`scrcpy`、`7z.exe` 等外部工具，需随发布包一并放置到输出目录，不能只分发 EXE。
 
+### platform-tools（检测设备的前提）
+
+工具箱按 `GetToolPath()`（`MainWindow.xaml.cs`）的顺序找 adb：`<程序目录>\platform-tools\adb.exe` → 上级目录 → 解决方案根 → 系统 PATH → `%LOCALAPPDATA%\Android\Sdk\platform-tools`。**一个都找不到时，设备检测会静默返回"未连接"而不报错**（`MainWindow.xaml.cs` 里 adb 与 fastboot 双双缺失即 `return`），看起来就像"检测不到手机"。
+
+执行 `bash tools/get-platform-tools.sh` 从 `dl.google.com` 拉取官方 platform-tools 并解压到 `publish/platform-tools`；`tools/build-setup.sh` 会在 `dotnet publish` 之后检查该目录，缺失则自动执行下载，因此两种安装包都自带 adb / fastboot。platform-tools 是 Google 的 Apache-2.0 二进制，不入库（`publish/` 已在 `.gitignore`），随包保留其 `NOTICE.txt`。
+
+投屏（`platform-tools/scrcpy.exe`）、解包（`7z.exe`）、断点续传（`aria2c.exe`）、EDL（`fh_loader.exe` / `QSaharaServer.exe`）等仍是各自独立项目的产物，需要自行放到上述目录，安装包里不含。
+
 ## 图标与启动性能
 
 上游把 121 处图标写成 `<svg:SvgViewbox Source="images/xxx.svg">`。SharpVectors 是**每个实例**各自解析一遍 SVG 再重建绘图对象，而这些实例全部在 `InitializeComponent()` 里构造，于是窗口出现之前要先花约 1.9 秒处理图标——实测冷启动 4.1 秒，其中 `InitializeComponent` 占 2.97 秒。
@@ -93,12 +103,12 @@ SharpVectors 依赖仍保留，因为还有两类图标必须在运行时解析�
 
 ## 打包
 
-`bash tools/build-setup.sh` 一次产出两种安装包（版本号 1.2.0，均装在 `%LOCALAPPDATA%\Programs\JiaHaoToolBox`）：
+`bash tools/build-setup.sh` 一次产出两种安装包（版本号 1.5.0，均装在 `%LOCALAPPDATA%\Programs\JiaHaoToolBox`，均自带 platform-tools）：
 
 | 产物 | 工具 | 说明 |
 | --- | --- | --- |
-| `out/JiaHaoToolBox-Setup-1.2.0.msi` | WiX 5.0.2 + `WixToolset.UI.wixext` | `setup/setup.wxs` + 由 `tools/harvest-publish.ps1` 依据 `publish/` 生成的 `setup/files.wxs`；`Scope=perUser`、`Language=2052`、含开始菜单与桌面快捷方式 |
-| `out/JiaHaoToolBox-Setup-1.2.0.exe` | Inno Setup 6 | `setup/JiaHaoToolBox.iss`，`PrivilegesRequired=lowest` |
+| `out/JiaHaoToolBox-Setup-1.5.0.msi` | WiX 5.0.2 + `WixToolset.UI.wixext` | `setup/setup.wxs` + 由 `tools/harvest-publish.ps1` 依据 `publish/` 生成的 `setup/files.wxs`；`Scope=perUser`、`Language=2052`、含开始菜单与桌面快捷方式 |
+| `out/JiaHaoToolBox-Setup-1.5.0.exe` | Inno Setup 6 | `setup/JiaHaoToolBox.iss`，`PrivilegesRequired=lowest` |
 
 两者的许可证页面都用 `setup/license.rtf`（由 `tools/make-license-rtf.ps1` 从 `LICENSE` 生成，纯 ASCII 以免 RTF 编码错乱）。
 

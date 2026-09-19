@@ -25,16 +25,16 @@
         <Rectangle x:Name="BatteryOutline"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
-                   Stroke="#FFB876DD" StrokeThickness="3"
+                   Stroke="#FF4A90E2" StrokeThickness="3"
                    RadiusX="10" RadiusY="10"
                    Fill="Transparent">
             <Rectangle.Effect>
-                <DropShadowEffect Color="#FFB876DD" BlurRadius="8" ShadowDepth="3" Direction="270" Opacity="0.5"/>
+                <DropShadowEffect Color="#FF4A90E2" BlurRadius="8" ShadowDepth="3" Direction="270" Opacity="0.5"/>
             </Rectangle.Effect>
         </Rectangle>
 
         <!-- 电池正极（右侧的小凸起） -->
-        <Rectangle Width="10" Height="20" Fill="BlueViolet"
+        <Rectangle Width="10" Height="20" Fill="#FF4A90E2"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Margin="0,0,-12,0"/>
@@ -45,7 +45,7 @@
                    VerticalAlignment="Stretch"
                    Margin="4"
                    RadiusX="6" RadiusY="6"
-                   Fill="#B266FF"
+                   Fill="#66B7FF"
                    Width="0"/>
 
         <!-- 光泽叠层：顶部轻微高光，增强卡通质感 -->
@@ -78,9 +78,9 @@
                    Width="{Binding ElementName=ChargeLevelFill, Path=Width}">
             <Rectangle.Fill>
                 <LinearGradientBrush x:Name="ChargingBrush" StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop x:Name="ChargeGs1" Color="#00D9B3FF" Offset="0.0"/>
-                    <GradientStop x:Name="ChargeGs2" Color="#55D9B3FF" Offset="0.15"/>
-                    <GradientStop x:Name="ChargeGs3" Color="#00D9B3FF" Offset="0.30"/>
+                    <GradientStop x:Name="ChargeGs1" Color="#00B3DBFF" Offset="0.0"/>
+                    <GradientStop x:Name="ChargeGs2" Color="#55B3DBFF" Offset="0.15"/>
+                    <GradientStop x:Name="ChargeGs3" Color="#00B3DBFF" Offset="0.30"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>

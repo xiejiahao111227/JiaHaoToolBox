@@ -5921,7 +5921,7 @@ namespace WpfApp1
             string flashMode,
             string? flashSourcePath)
         {
-            string toolVersion = JoinQQGroupButton?.Content?.ToString()?.Trim()
+            string toolVersion = VersionBadgeButton?.Content?.ToString()?.Trim()
                                  ?? "未知版本";
             string normalizedSourcePath = string.IsNullOrWhiteSpace(flashSourcePath)
                 ? "未记录"
