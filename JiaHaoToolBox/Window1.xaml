@@ -74,7 +74,7 @@
                         Cursor="Hand"
                         Click="CloseButton_Click" Margin="0,2,8,2">
                         <Button.Content>
-                            <svg:SvgViewbox Source="images/关闭.svg" Width="12" Height="12" />
+                            <svg:SvgViewbox Source="images/win-close.svg" Width="12" Height="12" />
                         </Button.Content>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -107,7 +107,7 @@
                         Cursor="Hand"
                         Click="MinimizeButton_Click" Margin="98,2,0,2">
                         <Button.Content>
-                            <svg:SvgViewbox Source="images/最小化.svg" Width="14" Height="15" />
+                            <svg:SvgViewbox Source="images/win-minimize.svg" Width="14" Height="15" />
                         </Button.Content>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -128,7 +128,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="V1.0.0-251109-F1" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="测试版 V1.2  OS1.0.2.0.UMNMIXM" VerticalAlignment="Top" Foreground="White"/>
                 </Grid>
             </Border>
             <!-- 预留内容区，保持空白 -->

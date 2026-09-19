@@ -381,3 +381,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# 安装包与验证产物
+setup/files.wxs
+tools/shots/
+*.log

@@ -1048,6 +1048,25 @@ namespace WpfApp1
             else Dispatcher.Invoke(Update);
         }
 
+        private void AutorootDonateLink_RequestNavigate(
+            object sender,
+            System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = e.Uri.AbsoluteUri,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                AppendAutorootLog($"打开上游赞赏页面失败: {ex.Message}", "yellow");
+            }
+            e.Handled = true;
+        }
+
         private async Task<string> GetSingleAdbSystemDeviceAsync(string adbPath, CancellationToken cancellationToken)
         {
             var result = await RunAutoRootToolAsync(adbPath, "devices", cancellationToken);

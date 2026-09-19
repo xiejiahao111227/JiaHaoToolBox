@@ -11,15 +11,19 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using WpfCursors = System.Windows.Input.Cursors;
 using WpfSize = System.Windows.Size;
+using IOFile = System.IO.File;
+using IOPath = System.IO.Path;
 
 namespace WpfApp1
 {
     public partial class MainWindow
     {
-        // 公告源。留空则不拉取任何公告：本分支不自带服务端，
+        // 公告源。留空则不拉取任何远端公告：本分支不自带服务端，
         // 沿用上游 violettool.top/notice.json 会把原作者的公告以"嘉豪工具箱"的名义展示给用户。
-        // 自建公告服务后，把 JSON 地址填到这里即可恢复该功能。
+        // 自建公告服务后，把 JSON 地址填到这里即可恢复该功能；
+        // 未填时改读安装目录下的 notice.json，方便打包者随安装包分发本地公告。
         private const string BroadcastNoticeFeedUrl = "";
+        private const string BroadcastNoticeLocalFileName = "notice.json";
         private static readonly HttpClient BroadcastNoticeHttpClient = new()
         {
             Timeout = TimeSpan.FromSeconds(8)
@@ -44,23 +48,14 @@ namespace WpfApp1
 
         private async Task InitializeBroadcastNoticesAsync()
         {
-            if (string.IsNullOrWhiteSpace(BroadcastNoticeFeedUrl))
-            {
-                return;
-            }
-
             try
             {
-                using var request = new HttpRequestMessage(HttpMethod.Get, BroadcastNoticeFeedUrl);
-                request.Headers.Add("Cache-Control", "no-cache");
-
-                using HttpResponseMessage response = await BroadcastNoticeHttpClient.SendAsync(request);
-                if (!response.IsSuccessStatusCode)
+                string? json = await LoadBroadcastNoticeJsonAsync();
+                if (string.IsNullOrWhiteSpace(json))
                 {
                     return;
                 }
 
-                string json = await response.Content.ReadAsStringAsync();
                 List<BroadcastNoticeItem> notices = ParseBroadcastNotices(json);
                 if (notices.Count == 0)
                 {
@@ -82,6 +77,33 @@ namespace WpfApp1
             {
                 // 公告加载失败不打断工具箱启动，也不占用底部栏空间。
             }
+        }
+
+        // 公告正文来源：优先远端公告源，其次安装目录下的本地 notice.json。
+        // 两者都是 {"items":[{"text":"...","url":"..."}]} 或直接一个数组。
+        private static async Task<string?> LoadBroadcastNoticeJsonAsync()
+        {
+            if (!string.IsNullOrWhiteSpace(BroadcastNoticeFeedUrl))
+            {
+                using var request = new HttpRequestMessage(HttpMethod.Get, BroadcastNoticeFeedUrl);
+                request.Headers.Add("Cache-Control", "no-cache");
+
+                using HttpResponseMessage response = await BroadcastNoticeHttpClient.SendAsync(request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            string localPath = IOPath.Combine(AppDomain.CurrentDomain.BaseDirectory, BroadcastNoticeLocalFileName);
+            if (!IOFile.Exists(localPath))
+            {
+                return null;
+            }
+
+            return await IOFile.ReadAllTextAsync(localPath);
         }
 
         private static List<BroadcastNoticeItem> ParseBroadcastNotices(string json)

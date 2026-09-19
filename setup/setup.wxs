@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+    <!-- 嘉豪工具箱安装包：self-contained win-x64 发布产物 + 每用户作用域
+         （Scope=perUser 装到 %LOCALAPPDATA%，免 UAC；本机管理员权限受限，perMachine 的 MSI 会报 2503） -->
+    <Package Name="嘉豪工具箱"
+             Manufacturer="嘉豪工具箱"
+             Version="1.2.0"
+             UpgradeCode="7f3d1c94-2b6e-4a58-9c07-d5e8a1f4b620"
+             Scope="perUser"
+             Compressed="yes"
+             Language="2052"
+             Codepage="936"
+             InstallerVersion="500">
+
+        <MajorUpgrade DowngradeErrorMessage="已安装更新版本的嘉豪工具箱，本次安装已中止。" />
+        <MediaTemplate EmbedCab="yes" />
+
+        <!-- SrcRoot 由 tools\build-setup.sh 用 -d 传入，避免把绝对路径写进版本库 -->
+        <WixVariable Id="WixUILicenseRtfFileName" Value="$(var.SrcRoot)setup\license.rtf" />
+        <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLFOLDER" />
+
+        <Icon Id="AppIcon.ico" SourceFile="$(var.SrcRoot)JiaHaoToolBox\JiaHaoToolBox.ico" />
+        <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+        <Property Id="ARPHELPLINK" Value="https://github.com/Smart-Paocai/VioletToolBox" />
+        <Property Id="ARPURLINFOABOUT" Value="https://github.com/Smart-Paocai/VioletToolBox" />
+        <Property Id="ARPCOMMENTS" Value="测试版 V1.2 / OS1.0.2.0.UMNMIXM，基于紫罗兰工具箱（GPL-3.0-or-later）" />
+
+        <StandardDirectory Id="LocalAppDataFolder">
+            <Directory Id="DIR_PROGRAMS" Name="Programs">
+                <Directory Id="INSTALLFOLDER" Name="JiaHaoToolBox" />
+            </Directory>
+        </StandardDirectory>
+        <StandardDirectory Id="ProgramMenuFolder">
+            <Directory Id="MENUFOLDER" Name="嘉豪工具箱" />
+        </StandardDirectory>
+        <StandardDirectory Id="DesktopFolder" />
+
+        <Feature Id="Complete" Title="嘉豪工具箱" Description="刷机工具箱全部模块" Level="1" Display="expand">
+            <ComponentGroupRef Id="PublishFiles" />
+            <ComponentGroupRef Id="AppShortcuts" />
+        </Feature>
+    </Package>
+
+    <Fragment>
+        <ComponentGroup Id="AppShortcuts" Directory="MENUFOLDER">
+            <Component Id="CMP_StartMenuShortcut">
+                <RegistryKey Root="HKCU" Key="Software\JiaHaoToolBox" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes">
+                    <RegistryValue Name="StartMenuShortcut" Value="1" Type="integer" KeyPath="yes" />
+                </RegistryKey>
+                <Shortcut Id="SK_StartMenu"
+                          Name="嘉豪工具箱"
+                          Target="[INSTALLFOLDER]JiaHaoToolBox.exe"
+                          WorkingDirectory="INSTALLFOLDER"
+                          Icon="AppIcon.ico" />
+                <RemoveFolder Id="RF_MenuFolder" Directory="MENUFOLDER" On="uninstall" />
+            </Component>
+            <Component Id="CMP_DesktopShortcut" Directory="DesktopFolder">
+                <RegistryKey Root="HKCU" Key="Software\JiaHaoToolBox" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes">
+                    <RegistryValue Name="DesktopShortcut" Value="1" Type="integer" KeyPath="yes" />
+                </RegistryKey>
+                <Shortcut Id="SK_Desktop"
+                          Name="嘉豪工具箱"
+                          Target="[INSTALLFOLDER]JiaHaoToolBox.exe"
+                          WorkingDirectory="INSTALLFOLDER"
+                          Icon="AppIcon.ico" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

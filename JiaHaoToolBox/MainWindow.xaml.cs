@@ -1103,17 +1103,8 @@ namespace WpfApp1
             Dispatcher.BeginInvoke(new Action(async () =>
             {
                 // 等待 UI 完全稳定
-                await Task.Delay(200);
+                await Task.Delay(350);
 
-                if (this.FindName("FlashFeatureGroup") is HandyControl.Controls.SideMenuItem flashItem)
-                {
-                    // 设置焦点并模拟鼠标左键点击
-                    flashItem.Focus();
-                    flashItem.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left) { RoutedEvent = Mouse.MouseDownEvent });
-                    flashItem.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left) { RoutedEvent = Mouse.MouseUpEvent });
-                }
-                
-                await Task.Delay(150); // 稍微加长等待动画开始的时间
                 
                 // 将焦点还给主页
                 if (homeItem != null)
@@ -5608,9 +5599,9 @@ namespace WpfApp1
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center
             };
 
-            buttonPanel.Children.Add(CreateScrcpyControlBarButton("多任务", "icon_多任务.svg", async () => await SendMirrorNavigationKeyAsync(187, true)));
-            buttonPanel.Children.Add(CreateScrcpyControlBarButton("主页", "主页.svg", async () => await SendMirrorNavigationKeyAsync(3, true)));
-            buttonPanel.Children.Add(CreateScrcpyControlBarButton("返回", "返回.svg", async () => await SendMirrorNavigationKeyAsync(4, true)));
+            buttonPanel.Children.Add(CreateScrcpyControlBarButton("多任务", "icon-recents.svg", async () => await SendMirrorNavigationKeyAsync(187, true)));
+            buttonPanel.Children.Add(CreateScrcpyControlBarButton("主页", "home.svg", async () => await SendMirrorNavigationKeyAsync(3, true)));
+            buttonPanel.Children.Add(CreateScrcpyControlBarButton("返回", "nav-back.svg", async () => await SendMirrorNavigationKeyAsync(4, true)));
 
             container.Child = buttonPanel;
 
@@ -7485,16 +7476,34 @@ namespace WpfApp1
                     {
                         string output = await process.StandardOutput.ReadToEndAsync();
                         string error = await process.StandardError.ReadToEndAsync();
-                        
+
+                        // fastboot 把 OKAY/INFO 写到 stdout、FAILED/error 写到 stderr，
+                        // 两边都要落到执行日志里，否则手动命令看起来像没有反应。
+                        foreach (string line in output.Replace("\r\n", "\n").Split('\n'))
+                        {
+                            if (!string.IsNullOrWhiteSpace(line))
+                            {
+                                LogToFastboot(line.Trim(), "Black");
+                            }
+                        }
+                        foreach (string line in error.Replace("\r\n", "\n").Split('\n'))
+                        {
+                            if (!string.IsNullOrWhiteSpace(line))
+                            {
+                                LogToFastboot(line.Trim(), "Red");
+                            }
+                        }
                     }
                     else
                     {
                         process.Kill();
+                        LogToFastboot("命令执行超过 10 秒已中断", "Yellow");
                     }
                 }
             }
             catch (Exception ex)
             {
+                LogToFastboot($"命令执行失败：{ex.Message}", "Red");
             }
         }
 
@@ -8504,7 +8513,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/安卓.svg";
+                item.IconSource = "images/android-blue.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8561,7 +8570,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8618,7 +8627,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8675,7 +8684,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8732,7 +8741,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8789,7 +8798,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -8846,7 +8855,7 @@ namespace WpfApp1
 
             foreach (var item in items)
             {
-                item.IconSource = "images/压缩包.svg";
+                item.IconSource = "images/archive.svg";
             }
 
             DriverFileListBox.ItemsSource = items;
@@ -10816,6 +10825,14 @@ namespace WpfApp1
                 {
                     LogToFastboot("请输入fastboot命令", "Yellow");
                 }
+            }
+        }
+
+        private void FastbootCommandTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                ExecuteFastbootCommandButton_Click(sender, e);
             }
         }
 
@@ -13924,6 +13941,60 @@ if (startXiaomiFlashButton != null)
     // CPU代号到名称的映射方法
 public partial class MainWindow : Window
     {
+        // 关于页的上游账号入口：Tag 均为上游原作者的站点，不属于本修改版
+        private void SocialMediaButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is System.Windows.Controls.Button button && button.Tag is string url)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = url,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show($"无法打开链接：{ex.Message}");
+                }
+            }
+        }
+
+        private void LinkGuideTextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OpenUpstreamDoc("https://violettool.top/", "已打开上游教程页面");
+        }
+
+        private void ConnectionGuideTextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OpenUpstreamDoc("https://violettool.top/tutorials/connect.html", "已打开上游连接指南页面");
+        }
+
+        private void JoinQQGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenUpstreamDoc(
+                "https://qun.qq.com/universal-share/share?ac=1&authKey=0%2FYo9g8At%2BoIzEUeWHD8tfpvheTN1pl0WOB3d1%2F8s44oY8R46Dh1pqutgsCRujMC&busi_data=eyJncm91cENvZGUiOiIxNTk5NzI5NTMiLCJ0b2tlbiI6Ikptcnkrb1ZONUhxQXJzQitjVHNZMGRQZVJJM29sMmdZNXJpcXZJc21ZRU9qZHorNUE1V0owQ2E2ZXZwSU9ieDQiLCJ1aW4iOiIxMjI3MzYzMzQyIn0%3D&data=XJNVJexYjP62pdpl2XDhWErxIhCBqYk2NE3CSNiRmZy5v9PcLijj2T86aWtX5Wf8FRXlb4ma8yEnVOkzVIkjYw&svctype=4&tempid=h5_group_info",
+                "已打开上游 QQ 群分享页");
+        }
+
+        private void OpenUpstreamDoc(string url, string successMessage)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+                AddLogMessage("系统", successMessage);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"打开链接时出错: {ex.Message}", "错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+        }
+
     private string GetCpuNameByCode(string cpuCode)
     {
         if (string.IsNullOrEmpty(cpuCode) || cpuCode == "--" || cpuCode == "--")
@@ -20609,21 +20680,31 @@ public partial class MainWindow : Window
                     return false;
                 }
 
-                // 检查ramdisk.cpio是否存在
-                string ramdiskPath = IOPath.Combine(workDir, "ramdisk.cpio");
-                if (!File.Exists(ramdiskPath))
+                // 检查 cpio 目标：勾选"强制 rootfs"时用 rootfs.cpio，否则优先 ramdisk.cpio，
+                // 找不到再回退到另一个（GKI / A-only 镜像解包出来的是 rootfs.cpio）
+                var chkLegacySar = this.FindName("chkLegacySar") as System.Windows.Controls.CheckBox;
+                string cpioName = chkLegacySar?.IsChecked == true ? "rootfs.cpio" : "ramdisk.cpio";
+                if (!File.Exists(IOPath.Combine(workDir, cpioName)))
                 {
-                    AppendAutorootLog("未找到ramdisk.cpio文件");
-                    return false;
+                    string fallbackName = cpioName == "ramdisk.cpio" ? "rootfs.cpio" : "ramdisk.cpio";
+                    if (!File.Exists(IOPath.Combine(workDir, fallbackName)))
+                    {
+                        AppendAutorootLog("未找到 ramdisk.cpio / rootfs.cpio 文件");
+                        return false;
+                    }
+                    AppendAutorootLog($"{cpioName} 不存在，改用 {fallbackName}");
+                    cpioName = fallbackName;
                 }
 
+                string ramdiskPath = IOPath.Combine(workDir, cpioName);
+
                 // 步骤3: 测试ramdisk状态
-                AppendAutorootLog("步骤3: 测试ramdisk状态...");
+                AppendAutorootLog($"步骤3: 测试 {cpioName} 状态...");
                 await RunMagiskbootCommand($"cpio \"{ramdiskPath}\" test", workDir);
 
                 // 步骤4: 备份原始ramdisk
                 AppendAutorootLog("步骤4: 备份原始ramdisk...");
-                string ramdiskOrigPath = IOPath.Combine(workDir, "ramdisk.cpio.orig");
+                string ramdiskOrigPath = IOPath.Combine(workDir, cpioName + ".orig");
                 File.Copy(ramdiskPath, ramdiskOrigPath, true);
 
                 // 步骤5: 创建Magisk配置文件
@@ -20631,8 +20712,8 @@ public partial class MainWindow : Window
                 await CreateMagiskConfig(workDir, bootPath);
 
                 // 步骤6: 将Magisk文件添加到ramdisk
-                AppendAutorootLog("步骤6: 将Magisk文件添加到ramdisk...");
-                if (!await AddMagiskToRamdisk(workDir))
+                AppendAutorootLog($"步骤6: 将Magisk文件添加到 {cpioName}...");
+                if (!await AddMagiskToRamdisk(workDir, cpioName))
                 {
                     AppendAutorootLog("添加Magisk文件到ramdisk失败");
                     return false;
@@ -20799,11 +20880,12 @@ public partial class MainWindow : Window
 
                 var chkKeepVerity = this.FindName("chkKeepVerity") as System.Windows.Controls.CheckBox;
                 var chkKeepForceEncrypt = this.FindName("chkKeepForceEncrypt") as System.Windows.Controls.CheckBox;
+                var chkRecoveryMode = this.FindName("chkRecoveryMode") as System.Windows.Controls.CheckBox;
 
                 // 添加配置选项
                 configLines.Add($"KEEPVERITY={chkKeepVerity?.IsChecked == true}");
                 configLines.Add($"KEEPFORCEENCRYPT={chkKeepForceEncrypt?.IsChecked == true}");
-                configLines.Add($"RECOVERYMODE=false"); // 默认false
+                configLines.Add($"RECOVERYMODE={chkRecoveryMode?.IsChecked == true}");
                 
                 // 计算SHA1
                 string sha1 = await GetBootSha1(bootPath);
@@ -20834,11 +20916,11 @@ public partial class MainWindow : Window
             }
         }
 
-        private async Task<bool> AddMagiskToRamdisk(string workDir)
+        private async Task<bool> AddMagiskToRamdisk(string workDir, string cpioName)
         {
             try
             {
-                string ramdiskPath = IOPath.Combine(workDir, "ramdisk.cpio");
+                string ramdiskPath = IOPath.Combine(workDir, cpioName);
                 
                 // 检查必要文件是否存在
                 string magiskInitPath = IOPath.Combine(workDir, "magiskinit");
@@ -20863,7 +20945,7 @@ public partial class MainWindow : Window
                     $"\"add 0644 overlay.d/sbin/stub.xz stub.xz\" " +
                     $"\"add 0644 overlay.d/sbin/init-ld.xz init-ld.xz\" " +
                     $"\"patch\" " +
-                    $"\"backup ramdisk.cpio.orig\" " +
+                    $"\"backup {cpioName}.orig\" " +
                     $"\"mkdir 000 .backup\" " +
                     $"\"add 000 .backup/.magisk config\"";
 

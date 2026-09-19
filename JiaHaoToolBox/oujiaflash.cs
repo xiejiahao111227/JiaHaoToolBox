@@ -7242,7 +7242,7 @@ namespace WpfApp1
             string folderIconPath = IOPath.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
                 "images",
-                "文件夹.svg");
+                "folder.svg");
             if (IOFile.Exists(folderIconPath))
             {
                 selectFirmwareFileButtonContent.Children.Add(new SvgViewbox

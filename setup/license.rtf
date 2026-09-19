@@ -1,0 +1,681 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset134 Consolas;}}\viewkind4\uc1
+\pard\qc\b\f0\fs28 \u22025?\u-29590?\u24037?\u20855?\u31665? JiaHaoToolBox \u23433?\u-30523?\u31243?\u24207?\b0\fs20\par
+\qc \u29256?\u26412? 1.2.0\u-248?\u27979?\u-29739?\u29256? V1.2 / OS1.0.2.0.UMNMIXM\u-247?\par\par
+\ql\fs18 \u26412?\u23433?\u-30523?\u21253?\u20026?\u22025?\u-29590?\u24037?\u20855?\u31665?\u-248?JiaHaoToolBox\u-247?\u23433?\u-30523?\u31243?\u24207?\u12290?\u22025?\u-29590?\u24037?\u20855?\u31665?\u26159?\u22522?\u20110? GPL-3.0-or-later \u-29768?\u21487?\u-29759?\u12289?\u30001?\u32043?\u32599?\u20848?\u24037?\u20855?\u31665?\u-248?VioletToolBox\u-247?\u-26503?\u30446?\u-30643?\u29983?\u20462?\u25913?\u-32756?\u26469?\u30340?\u20316?\u21697?\u-244?\u19978?\u28216?\u29256?\u26435?\u24402? Smart-Paocai \u21450?\u20854?\u-29407?\u29486?\u-32763?\u25152?\u26377?\u12290?\u23433?\u-30523?\u24182?\u20351?\u29992?\u26412?\u31243?\u24207?\u21363?\u-30616?\u31034?\u20320?\u25509?\u21463?\u19979?\u21015? GNU GPLv3 \u26465?\u27454?\u12290?\par\par
+\pard\qc\b\fs24 GNU GENERAL PUBLIC LICENSE\b0\fs20\par\par
+\fs18                     GNU GENERAL PUBLIC LICENSE\par
+\fs18                        Version 3, 29 June 2007\par
+\fs18 \par
+\fs18  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\par
+\fs18  Everyone is permitted to copy and distribute verbatim copies\par
+\fs18  of this license document, but changing it is not allowed.\par
+\fs18 \par
+\fs18                             Preamble\par
+\fs18 \par
+\fs18   The GNU General Public License is a free, copyleft license for\par
+\fs18 software and other kinds of works.\par
+\fs18 \par
+\fs18   The licenses for most software and other practical works are designed\par
+\fs18 to take away your freedom to share and change the works.  By contrast,\par
+\fs18 the GNU General Public License is intended to guarantee your freedom to\par
+\fs18 share and change all versions of a program--to make sure it remains free\par
+\fs18 software for all its users.  We, the Free Software Foundation, use the\par
+\fs18 GNU General Public License for most of our software; it applies also to\par
+\fs18 any other work released this way by its authors.  You can apply it to\par
+\fs18 your programs, too.\par
+\fs18 \par
+\fs18   When we speak of free software, we are referring to freedom, not\par
+\fs18 price.  Our General Public Licenses are designed to make sure that you\par
+\fs18 have the freedom to distribute copies of free software (and charge for\par
+\fs18 them if you wish), that you receive source code or can get it if you\par
+\fs18 want it, that you can change the software or use pieces of it in new\par
+\fs18 free programs, and that you know you can do these things.\par
+\fs18 \par
+\fs18   To protect your rights, we need to prevent others from denying you\par
+\fs18 these rights or asking you to surrender the rights.  Therefore, you have\par
+\fs18 certain responsibilities if you distribute copies of the software, or if\par
+\fs18 you modify it: responsibilities to respect the freedom of others.\par
+\fs18 \par
+\fs18   For example, if you distribute copies of such a program, whether\par
+\fs18 gratis or for a fee, you must pass on to the recipients the same\par
+\fs18 freedoms that you received.  You must make sure that they, too, receive\par
+\fs18 or can get the source code.  And you must show them these terms so they\par
+\fs18 know their rights.\par
+\fs18 \par
+\fs18   Developers that use the GNU GPL protect your rights with two steps:\par
+\fs18 (1) assert copyright on the software, and (2) offer you this License\par
+\fs18 giving you legal permission to copy, distribute and/or modify it.\par
+\fs18 \par
+\fs18   For the developers' and authors' protection, the GPL clearly explains\par
+\fs18 that there is no warranty for this free software.  For both users' and\par
+\fs18 authors' sake, the GPL requires that modified versions be marked as\par
+\fs18 changed, so that their problems will not be attributed erroneously to\par
+\fs18 authors of previous versions.\par
+\fs18 \par
+\fs18   Some devices are designed to deny users access to install or run\par
+\fs18 modified versions of the software inside them, although the manufacturer\par
+\fs18 can do so.  This is fundamentally incompatible with the aim of\par
+\fs18 protecting users' freedom to change the software.  The systematic\par
+\fs18 pattern of such abuse occurs in the area of products for individuals to\par
+\fs18 use, which is precisely where it is most unacceptable.  Therefore, we\par
+\fs18 have designed this version of the GPL to prohibit the practice for those\par
+\fs18 products.  If such problems arise substantially in other domains, we\par
+\fs18 stand ready to extend this provision to those domains in future versions\par
+\fs18 of the GPL, as needed to protect the freedom of users.\par
+\fs18 \par
+\fs18   Finally, every program is threatened constantly by software patents.\par
+\fs18 States should not allow patents to restrict development and use of\par
+\fs18 software on general-purpose computers, but in those that do, we wish to\par
+\fs18 avoid the special danger that patents applied to a free program could\par
+\fs18 make it effectively proprietary.  To prevent this, the GPL assures that\par
+\fs18 patents cannot be used to render the program non-free.\par
+\fs18 \par
+\fs18   The precise terms and conditions for copying, distribution and\par
+\fs18 modification follow.\par
+\fs18 \par
+\fs18                        TERMS AND CONDITIONS\par
+\fs18 \par
+\fs18   0. Definitions.\par
+\fs18 \par
+\fs18   "This License" refers to version 3 of the GNU General Public License.\par
+\fs18 \par
+\fs18   "Copyright" also means copyright-like laws that apply to other kinds of\par
+\fs18 works, such as semiconductor masks.\par
+\fs18 \par
+\fs18   "The Program" refers to any copyrightable work licensed under this\par
+\fs18 License.  Each licensee is addressed as "you".  "Licensees" and\par
+\fs18 "recipients" may be individuals or organizations.\par
+\fs18 \par
+\fs18   To "modify" a work means to copy from or adapt all or part of the work\par
+\fs18 in a fashion requiring copyright permission, other than the making of an\par
+\fs18 exact copy.  The resulting work is called a "modified version" of the\par
+\fs18 earlier work or a work "based on" the earlier work.\par
+\fs18 \par
+\fs18   A "covered work" means either the unmodified Program or a work based\par
+\fs18 on the Program.\par
+\fs18 \par
+\fs18   To "propagate" a work means to do anything with it that, without\par
+\fs18 permission, would make you directly or secondarily liable for\par
+\fs18 infringement under applicable copyright law, except executing it on a\par
+\fs18 computer or modifying a private copy.  Propagation includes copying,\par
+\fs18 distribution (with or without modification), making available to the\par
+\fs18 public, and in some countries other activities as well.\par
+\fs18 \par
+\fs18   To "convey" a work means any kind of propagation that enables other\par
+\fs18 parties to make or receive copies.  Mere interaction with a user through\par
+\fs18 a computer network, with no transfer of a copy, is not conveying.\par
+\fs18 \par
+\fs18   An interactive user interface displays "Appropriate Legal Notices"\par
+\fs18 to the extent that it includes a convenient and prominently visible\par
+\fs18 feature that (1) displays an appropriate copyright notice, and (2)\par
+\fs18 tells the user that there is no warranty for the work (except to the\par
+\fs18 extent that warranties are provided), that licensees may convey the\par
+\fs18 work under this License, and how to view a copy of this License.  If\par
+\fs18 the interface presents a list of user commands or options, such as a\par
+\fs18 menu, a prominent item in the list meets this criterion.\par
+\fs18 \par
+\fs18   1. Source Code.\par
+\fs18 \par
+\fs18   The "source code" for a work means the preferred form of the work\par
+\fs18 for making modifications to it.  "Object code" means any non-source\par
+\fs18 form of a work.\par
+\fs18 \par
+\fs18   A "Standard Interface" means an interface that either is an official\par
+\fs18 standard defined by a recognized standards body, or, in the case of\par
+\fs18 interfaces specified for a particular programming language, one that\par
+\fs18 is widely used among developers working in that language.\par
+\fs18 \par
+\fs18   The "System Libraries" of an executable work include anything, other\par
+\fs18 than the work as a whole, that (a) is included in the normal form of\par
+\fs18 packaging a Major Component, but which is not part of that Major\par
+\fs18 Component, and (b) serves only to enable use of the work with that\par
+\fs18 Major Component, or to implement a Standard Interface for which an\par
+\fs18 implementation is available to the public in source code form.  A\par
+\fs18 "Major Component", in this context, means a major essential component\par
+\fs18 (kernel, window system, and so on) of the specific operating system\par
+\fs18 (if any) on which the executable work runs, or a compiler used to\par
+\fs18 produce the work, or an object code interpreter used to run it.\par
+\fs18 \par
+\fs18   The "Corresponding Source" for a work in object code form means all\par
+\fs18 the source code needed to generate, install, and (for an executable\par
+\fs18 work) run the object code and to modify the work, including scripts to\par
+\fs18 control those activities.  However, it does not include the work's\par
+\fs18 System Libraries, or general-purpose tools or generally available free\par
+\fs18 programs which are used unmodified in performing those activities but\par
+\fs18 which are not part of the work.  For example, Corresponding Source\par
+\fs18 includes interface definition files associated with source files for\par
+\fs18 the work, and the source code for shared libraries and dynamically\par
+\fs18 linked subprograms that the work is specifically designed to require,\par
+\fs18 such as by intimate data communication or control flow between those\par
+\fs18 subprograms and other parts of the work.\par
+\fs18 \par
+\fs18   The Corresponding Source need not include anything that users\par
+\fs18 can regenerate automatically from other parts of the Corresponding\par
+\fs18 Source.\par
+\fs18 \par
+\fs18   The Corresponding Source for a work in source code form is that\par
+\fs18 same work.\par
+\fs18 \par
+\fs18   2. Basic Permissions.\par
+\fs18 \par
+\fs18   All rights granted under this License are granted for the term of\par
+\fs18 copyright on the Program, and are irrevocable provided the stated\par
+\fs18 conditions are met.  This License explicitly affirms your unlimited\par
+\fs18 permission to run the unmodified Program.  The output from running a\par
+\fs18 covered work is covered by this License only if the output, given its\par
+\fs18 content, constitutes a covered work.  This License acknowledges your\par
+\fs18 rights of fair use or other equivalent, as provided by copyright law.\par
+\fs18 \par
+\fs18   You may make, run and propagate covered works that you do not\par
+\fs18 convey, without conditions so long as your license otherwise remains\par
+\fs18 in force.  You may convey covered works to others for the sole purpose\par
+\fs18 of having them make modifications exclusively for you, or provide you\par
+\fs18 with facilities for running those works, provided that you comply with\par
+\fs18 the terms of this License in conveying all material for which you do\par
+\fs18 not control copyright.  Those thus making or running the covered works\par
+\fs18 for you must do so exclusively on your behalf, under your direction\par
+\fs18 and control, on terms that prohibit them from making any copies of\par
+\fs18 your copyrighted material outside their relationship with you.\par
+\fs18 \par
+\fs18   Conveying under any other circumstances is permitted solely under\par
+\fs18 the conditions stated below.  Sublicensing is not allowed; section 10\par
+\fs18 makes it unnecessary.\par
+\fs18 \par
+\fs18   3. Protecting Users' Legal Rights From Anti-Circumvention Law.\par
+\fs18 \par
+\fs18   No covered work shall be deemed part of an effective technological\par
+\fs18 measure under any applicable law fulfilling obligations under article\par
+\fs18 11 of the WIPO copyright treaty adopted on 20 December 1996, or\par
+\fs18 similar laws prohibiting or restricting circumvention of such\par
+\fs18 measures.\par
+\fs18 \par
+\fs18   When you convey a covered work, you waive any legal power to forbid\par
+\fs18 circumvention of technological measures to the extent such circumvention\par
+\fs18 is effected by exercising rights under this License with respect to\par
+\fs18 the covered work, and you disclaim any intention to limit operation or\par
+\fs18 modification of the work as a means of enforcing, against the work's\par
+\fs18 users, your or third parties' legal rights to forbid circumvention of\par
+\fs18 technological measures.\par
+\fs18 \par
+\fs18   4. Conveying Verbatim Copies.\par
+\fs18 \par
+\fs18   You may convey verbatim copies of the Program's source code as you\par
+\fs18 receive it, in any medium, provided that you conspicuously and\par
+\fs18 appropriately publish on each copy an appropriate copyright notice;\par
+\fs18 keep intact all notices stating that this License and any\par
+\fs18 non-permissive terms added in accord with section 7 apply to the code;\par
+\fs18 keep intact all notices of the absence of any warranty; and give all\par
+\fs18 recipients a copy of this License along with the Program.\par
+\fs18 \par
+\fs18   You may charge any price or no price for each copy that you convey,\par
+\fs18 and you may offer support or warranty protection for a fee.\par
+\fs18 \par
+\fs18   5. Conveying Modified Source Versions.\par
+\fs18 \par
+\fs18   You may convey a work based on the Program, or the modifications to\par
+\fs18 produce it from the Program, in the form of source code under the\par
+\fs18 terms of section 4, provided that you also meet all of these conditions:\par
+\fs18 \par
+\fs18     a) The work must carry prominent notices stating that you modified\par
+\fs18     it, and giving a relevant date.\par
+\fs18 \par
+\fs18     b) The work must carry prominent notices stating that it is\par
+\fs18     released under this License and any conditions added under section\par
+\fs18     7.  This requirement modifies the requirement in section 4 to\par
+\fs18     "keep intact all notices".\par
+\fs18 \par
+\fs18     c) You must license the entire work, as a whole, under this\par
+\fs18     License to anyone who comes into possession of a copy.  This\par
+\fs18     License will therefore apply, along with any applicable section 7\par
+\fs18     additional terms, to the whole of the work, and all its parts,\par
+\fs18     regardless of how they are packaged.  This License gives no\par
+\fs18     permission to license the work in any other way, but it does not\par
+\fs18     invalidate such permission if you have separately received it.\par
+\fs18 \par
+\fs18     d) If the work has interactive user interfaces, each must display\par
+\fs18     Appropriate Legal Notices; however, if the Program has interactive\par
+\fs18     interfaces that do not display Appropriate Legal Notices, your\par
+\fs18     work need not make them do so.\par
+\fs18 \par
+\fs18   A compilation of a covered work with other separate and independent\par
+\fs18 works, which are not by their nature extensions of the covered work,\par
+\fs18 and which are not combined with it such as to form a larger program,\par
+\fs18 in or on a volume of a storage or distribution medium, is called an\par
+\fs18 "aggregate" if the compilation and its resulting copyright are not\par
+\fs18 used to limit the access or legal rights of the compilation's users\par
+\fs18 beyond what the individual works permit.  Inclusion of a covered work\par
+\fs18 in an aggregate does not cause this License to apply to the other\par
+\fs18 parts of the aggregate.\par
+\fs18 \par
+\fs18   6. Conveying Non-Source Forms.\par
+\fs18 \par
+\fs18   You may convey a covered work in object code form under the terms\par
+\fs18 of sections 4 and 5, provided that you also convey the\par
+\fs18 machine-readable Corresponding Source under the terms of this License,\par
+\fs18 in one of these ways:\par
+\fs18 \par
+\fs18     a) Convey the object code in, or embodied in, a physical product\par
+\fs18     (including a physical distribution medium), accompanied by the\par
+\fs18     Corresponding Source fixed on a durable physical medium\par
+\fs18     customarily used for software interchange.\par
+\fs18 \par
+\fs18     b) Convey the object code in, or embodied in, a physical product\par
+\fs18     (including a physical distribution medium), accompanied by a\par
+\fs18     written offer, valid for at least three years and valid for as\par
+\fs18     long as you offer spare parts or customer support for that product\par
+\fs18     model, to give anyone who possesses the object code either (1) a\par
+\fs18     copy of the Corresponding Source for all the software in the\par
+\fs18     product that is covered by this License, on a durable physical\par
+\fs18     medium customarily used for software interchange, for a price no\par
+\fs18     more than your reasonable cost of physically performing this\par
+\fs18     conveying of source, or (2) access to copy the\par
+\fs18     Corresponding Source from a network server at no charge.\par
+\fs18 \par
+\fs18     c) Convey individual copies of the object code with a copy of the\par
+\fs18     written offer to provide the Corresponding Source.  This\par
+\fs18     alternative is allowed only occasionally and noncommercially, and\par
+\fs18     only if you received the object code with such an offer, in accord\par
+\fs18     with subsection 6b.\par
+\fs18 \par
+\fs18     d) Convey the object code by offering access from a designated\par
+\fs18     place (gratis or for a charge), and offer equivalent access to the\par
+\fs18     Corresponding Source in the same way through the same place at no\par
+\fs18     further charge.  You need not require recipients to copy the\par
+\fs18     Corresponding Source along with the object code.  If the place to\par
+\fs18     copy the object code is a network server, the Corresponding Source\par
+\fs18     may be on a different server (operated by you or a third party)\par
+\fs18     that supports equivalent copying facilities, provided you maintain\par
+\fs18     clear directions next to the object code saying where to find the\par
+\fs18     Corresponding Source.  Regardless of what server hosts the\par
+\fs18     Corresponding Source, you remain obligated to ensure that it is\par
+\fs18     available for as long as needed to satisfy these requirements.\par
+\fs18 \par
+\fs18     e) Convey the object code using peer-to-peer transmission, provided\par
+\fs18     you inform other peers where the object code and Corresponding\par
+\fs18     Source of the work are being offered to the general public at no\par
+\fs18     charge under subsection 6d.\par
+\fs18 \par
+\fs18   A separable portion of the object code, whose source code is excluded\par
+\fs18 from the Corresponding Source as a System Library, need not be\par
+\fs18 included in conveying the object code work.\par
+\fs18 \par
+\fs18   A "User Product" is either (1) a "consumer product", which means any\par
+\fs18 tangible personal property which is normally used for personal, family,\par
+\fs18 or household purposes, or (2) anything designed or sold for incorporation\par
+\fs18 into a dwelling.  In determining whether a product is a consumer product,\par
+\fs18 doubtful cases shall be resolved in favor of coverage.  For a particular\par
+\fs18 product received by a particular user, "normally used" refers to a\par
+\fs18 typical or common use of that class of product, regardless of the status\par
+\fs18 of the particular user or of the way in which the particular user\par
+\fs18 actually uses, or expects or is expected to use, the product.  A product\par
+\fs18 is a consumer product regardless of whether the product has substantial\par
+\fs18 commercial, industrial or non-consumer uses, unless such uses represent\par
+\fs18 the only significant mode of use of the product.\par
+\fs18 \par
+\fs18   "Installation Information" for a User Product means any methods,\par
+\fs18 procedures, authorization keys, or other information required to install\par
+\fs18 and execute modified versions of a covered work in that User Product from\par
+\fs18 a modified version of its Corresponding Source.  The information must\par
+\fs18 suffice to ensure that the continued functioning of the modified object\par
+\fs18 code is in no case prevented or interfered with solely because\par
+\fs18 modification has been made.\par
+\fs18 \par
+\fs18   If you convey an object code work under this section in, or with, or\par
+\fs18 specifically for use in, a User Product, and the conveying occurs as\par
+\fs18 part of a transaction in which the right of possession and use of the\par
+\fs18 User Product is transferred to the recipient in perpetuity or for a\par
+\fs18 fixed term (regardless of how the transaction is characterized), the\par
+\fs18 Corresponding Source conveyed under this section must be accompanied\par
+\fs18 by the Installation Information.  But this requirement does not apply\par
+\fs18 if neither you nor any third party retains the ability to install\par
+\fs18 modified object code on the User Product (for example, the work has\par
+\fs18 been installed in ROM).\par
+\fs18 \par
+\fs18   The requirement to provide Installation Information does not include a\par
+\fs18 requirement to continue to provide support service, warranty, or updates\par
+\fs18 for a work that has been modified or installed by the recipient, or for\par
+\fs18 the User Product in which it has been modified or installed.  Access to a\par
+\fs18 network may be denied when the modification itself materially and\par
+\fs18 adversely affects the operation of the network or violates the rules and\par
+\fs18 protocols for communication across the network.\par
+\fs18 \par
+\fs18   Corresponding Source conveyed, and Installation Information provided,\par
+\fs18 in accord with this section must be in a format that is publicly\par
+\fs18 documented (and with an implementation available to the public in\par
+\fs18 source code form), and must require no special password or key for\par
+\fs18 unpacking, reading or copying.\par
+\fs18 \par
+\fs18   7. Additional Terms.\par
+\fs18 \par
+\fs18   "Additional permissions" are terms that supplement the terms of this\par
+\fs18 License by making exceptions from one or more of its conditions.\par
+\fs18 Additional permissions that are applicable to the entire Program shall\par
+\fs18 be treated as though they were included in this License, to the extent\par
+\fs18 that they are valid under applicable law.  If additional permissions\par
+\fs18 apply only to part of the Program, that part may be used separately\par
+\fs18 under those permissions, but the entire Program remains governed by\par
+\fs18 this License without regard to the additional permissions.\par
+\fs18 \par
+\fs18   When you convey a copy of a covered work, you may at your option\par
+\fs18 remove any additional permissions from that copy, or from any part of\par
+\fs18 it.  (Additional permissions may be written to require their own\par
+\fs18 removal in certain cases when you modify the work.)  You may place\par
+\fs18 additional permissions on material, added by you to a covered work,\par
+\fs18 for which you have or can give appropriate copyright permission.\par
+\fs18 \par
+\fs18   Notwithstanding any other provision of this License, for material you\par
+\fs18 add to a covered work, you may (if authorized by the copyright holders of\par
+\fs18 that material) supplement the terms of this License with terms:\par
+\fs18 \par
+\fs18     a) Disclaiming warranty or limiting liability differently from the\par
+\fs18     terms of sections 15 and 16 of this License; or\par
+\fs18 \par
+\fs18     b) Requiring preservation of specified reasonable legal notices or\par
+\fs18     author attributions in that material or in the Appropriate Legal\par
+\fs18     Notices displayed by works containing it; or\par
+\fs18 \par
+\fs18     c) Prohibiting misrepresentation of the origin of that material, or\par
+\fs18     requiring that modified versions of such material be marked in\par
+\fs18     reasonable ways as different from the original version; or\par
+\fs18 \par
+\fs18     d) Limiting the use for publicity purposes of names of licensors or\par
+\fs18     authors of the material; or\par
+\fs18 \par
+\fs18     e) Declining to grant rights under trademark law for use of some\par
+\fs18     trade names, trademarks, or service marks; or\par
+\fs18 \par
+\fs18     f) Requiring indemnification of licensors and authors of that\par
+\fs18     material by anyone who conveys the material (or modified versions of\par
+\fs18     it) with contractual assumptions of liability to the recipient, for\par
+\fs18     any liability that these contractual assumptions directly impose on\par
+\fs18     those licensors and authors.\par
+\fs18 \par
+\fs18   All other non-permissive additional terms are considered "further\par
+\fs18 restrictions" within the meaning of section 10.  If the Program as you\par
+\fs18 received it, or any part of it, contains a notice stating that it is\par
+\fs18 governed by this License along with a term that is a further\par
+\fs18 restriction, you may remove that term.  If a license document contains\par
+\fs18 a further restriction but permits relicensing or conveying under this\par
+\fs18 License, you may add to a covered work material governed by the terms\par
+\fs18 of that license document, provided that the further restriction does\par
+\fs18 not survive such relicensing or conveying.\par
+\fs18 \par
+\fs18   If you add terms to a covered work in accord with this section, you\par
+\fs18 must place, in the relevant source files, a statement of the\par
+\fs18 additional terms that apply to those files, or a notice indicating\par
+\fs18 where to find the applicable terms.\par
+\fs18 \par
+\fs18   Additional terms, permissive or non-permissive, may be stated in the\par
+\fs18 form of a separately written license, or stated as exceptions;\par
+\fs18 the above requirements apply either way.\par
+\fs18 \par
+\fs18   8. Termination.\par
+\fs18 \par
+\fs18   You may not propagate or modify a covered work except as expressly\par
+\fs18 provided under this License.  Any attempt otherwise to propagate or\par
+\fs18 modify it is void, and will automatically terminate your rights under\par
+\fs18 this License (including any patent licenses granted under the third\par
+\fs18 paragraph of section 11).\par
+\fs18 \par
+\fs18   However, if you cease all violation of this License, then your\par
+\fs18 license from a particular copyright holder is reinstated (a)\par
+\fs18 provisionally, unless and until the copyright holder explicitly and\par
+\fs18 finally terminates your license, and (b) permanently, if the copyright\par
+\fs18 holder fails to notify you of the violation by some reasonable means\par
+\fs18 prior to 60 days after the cessation.\par
+\fs18 \par
+\fs18   Moreover, your license from a particular copyright holder is\par
+\fs18 reinstated permanently if the copyright holder notifies you of the\par
+\fs18 violation by some reasonable means, this is the first time you have\par
+\fs18 received notice of violation of this License (for any work) from that\par
+\fs18 copyright holder, and you cure the violation prior to 30 days after\par
+\fs18 your receipt of the notice.\par
+\fs18 \par
+\fs18   Termination of your rights under this section does not terminate the\par
+\fs18 licenses of parties who have received copies or rights from you under\par
+\fs18 this License.  If your rights have been terminated and not permanently\par
+\fs18 reinstated, you do not qualify to receive new licenses for the same\par
+\fs18 material under section 10.\par
+\fs18 \par
+\fs18   9. Acceptance Not Required for Having Copies.\par
+\fs18 \par
+\fs18   You are not required to accept this License in order to receive or\par
+\fs18 run a copy of the Program.  Ancillary propagation of a covered work\par
+\fs18 occurring solely as a consequence of using peer-to-peer transmission\par
+\fs18 to receive a copy likewise does not require acceptance.  However,\par
+\fs18 nothing other than this License grants you permission to propagate or\par
+\fs18 modify any covered work.  These actions infringe copyright if you do\par
+\fs18 not accept this License.  Therefore, by modifying or propagating a\par
+\fs18 covered work, you indicate your acceptance of this License to do so.\par
+\fs18 \par
+\fs18   10. Automatic Licensing of Downstream Recipients.\par
+\fs18 \par
+\fs18   Each time you convey a covered work, the recipient automatically\par
+\fs18 receives a license from the original licensors, to run, modify and\par
+\fs18 propagate that work, subject to this License.  You are not responsible\par
+\fs18 for enforcing compliance by third parties with this License.\par
+\fs18 \par
+\fs18   An "entity transaction" is a transaction transferring control of an\par
+\fs18 organization, or substantially all assets of one, or subdividing an\par
+\fs18 organization, or merging organizations.  If propagation of a covered\par
+\fs18 work results from an entity transaction, each party to that\par
+\fs18 transaction who receives a copy of the work also receives whatever\par
+\fs18 licenses to the work the party's predecessor in interest had or could\par
+\fs18 give under the previous paragraph, plus a right to possession of the\par
+\fs18 Corresponding Source of the work from the predecessor in interest, if\par
+\fs18 the predecessor has it or can get it with reasonable efforts.\par
+\fs18 \par
+\fs18   You may not impose any further restrictions on the exercise of the\par
+\fs18 rights granted or affirmed under this License.  For example, you may\par
+\fs18 not impose a license fee, royalty, or other charge for exercise of\par
+\fs18 rights granted under this License, and you may not initiate litigation\par
+\fs18 (including a cross-claim or counterclaim in a lawsuit) alleging that\par
+\fs18 any patent claim is infringed by making, using, selling, offering for\par
+\fs18 sale, or importing the Program or any portion of it.\par
+\fs18 \par
+\fs18   11. Patents.\par
+\fs18 \par
+\fs18   A "contributor" is a copyright holder who authorizes use under this\par
+\fs18 License of the Program or a work on which the Program is based.  The\par
+\fs18 work thus licensed is called the contributor's "contributor version".\par
+\fs18 \par
+\fs18   A contributor's "essential patent claims" are all patent claims\par
+\fs18 owned or controlled by the contributor, whether already acquired or\par
+\fs18 hereafter acquired, that would be infringed by some manner, permitted\par
+\fs18 by this License, of making, using, or selling its contributor version,\par
+\fs18 but do not include claims that would be infringed only as a\par
+\fs18 consequence of further modification of the contributor version.  For\par
+\fs18 purposes of this definition, "control" includes the right to grant\par
+\fs18 patent sublicenses in a manner consistent with the requirements of\par
+\fs18 this License.\par
+\fs18 \par
+\fs18   Each contributor grants you a non-exclusive, worldwide, royalty-free\par
+\fs18 patent license under the contributor's essential patent claims, to\par
+\fs18 make, use, sell, offer for sale, import and otherwise run, modify and\par
+\fs18 propagate the contents of its contributor version.\par
+\fs18 \par
+\fs18   In the following three paragraphs, a "patent license" is any express\par
+\fs18 agreement or commitment, however denominated, not to enforce a patent\par
+\fs18 (such as an express permission to practice a patent or covenant not to\par
+\fs18 sue for patent infringement).  To "grant" such a patent license to a\par
+\fs18 party means to make such an agreement or commitment not to enforce a\par
+\fs18 patent against the party.\par
+\fs18 \par
+\fs18   If you convey a covered work, knowingly relying on a patent license,\par
+\fs18 and the Corresponding Source of the work is not available for anyone\par
+\fs18 to copy, free of charge and under the terms of this License, through a\par
+\fs18 publicly available network server or other readily accessible means,\par
+\fs18 then you must either (1) cause the Corresponding Source to be so\par
+\fs18 available, or (2) arrange to deprive yourself of the benefit of the\par
+\fs18 patent license for this particular work, or (3) arrange, in a manner\par
+\fs18 consistent with the requirements of this License, to extend the patent\par
+\fs18 license to downstream recipients.  "Knowingly relying" means you have\par
+\fs18 actual knowledge that, but for the patent license, your conveying the\par
+\fs18 covered work in a country, or your recipient's use of the covered work\par
+\fs18 in a country, would infringe one or more identifiable patents in that\par
+\fs18 country that you have reason to believe are valid.\par
+\fs18 \par
+\fs18   If, pursuant to or in connection with a single transaction or\par
+\fs18 arrangement, you convey, or propagate by procuring conveyance of, a\par
+\fs18 covered work, and grant a patent license to some of the parties\par
+\fs18 receiving the covered work authorizing them to use, propagate, modify\par
+\fs18 or convey a specific copy of the covered work, then the patent license\par
+\fs18 you grant is automatically extended to all recipients of the covered\par
+\fs18 work and works based on it.\par
+\fs18 \par
+\fs18   A patent license is "discriminatory" if it does not include within\par
+\fs18 the scope of its coverage, prohibits the exercise of, or is\par
+\fs18 conditioned on the non-exercise of one or more of the rights that are\par
+\fs18 specifically granted under this License.  You may not convey a covered\par
+\fs18 work if you are a party to an arrangement with a third party that is\par
+\fs18 in the business of distributing software, under which you make payment\par
+\fs18 to the third party based on the extent of your activity of conveying\par
+\fs18 the work, and under which the third party grants, to any of the\par
+\fs18 parties who would receive the covered work from you, a discriminatory\par
+\fs18 patent license (a) in connection with copies of the covered work\par
+\fs18 conveyed by you (or copies made from those copies), or (b) primarily\par
+\fs18 for and in connection with specific products or compilations that\par
+\fs18 contain the covered work, unless you entered into that arrangement,\par
+\fs18 or that patent license was granted, prior to 28 March 2007.\par
+\fs18 \par
+\fs18   Nothing in this License shall be construed as excluding or limiting\par
+\fs18 any implied license or other defenses to infringement that may\par
+\fs18 otherwise be available to you under applicable patent law.\par
+\fs18 \par
+\fs18   12. No Surrender of Others' Freedom.\par
+\fs18 \par
+\fs18   If conditions are imposed on you (whether by court order, agreement or\par
+\fs18 otherwise) that contradict the conditions of this License, they do not\par
+\fs18 excuse you from the conditions of this License.  If you cannot convey a\par
+\fs18 covered work so as to satisfy simultaneously your obligations under this\par
+\fs18 License and any other pertinent obligations, then as a consequence you may\par
+\fs18 not convey it at all.  For example, if you agree to terms that obligate you\par
+\fs18 to collect a royalty for further conveying from those to whom you convey\par
+\fs18 the Program, the only way you could satisfy both those terms and this\par
+\fs18 License would be to refrain entirely from conveying the Program.\par
+\fs18 \par
+\fs18   13. Use with the GNU Affero General Public License.\par
+\fs18 \par
+\fs18   Notwithstanding any other provision of this License, you have\par
+\fs18 permission to link or combine any covered work with a work licensed\par
+\fs18 under version 3 of the GNU Affero General Public License into a single\par
+\fs18 combined work, and to convey the resulting work.  The terms of this\par
+\fs18 License will continue to apply to the part which is the covered work,\par
+\fs18 but the special requirements of the GNU Affero General Public License,\par
+\fs18 section 13, concerning interaction through a network will apply to the\par
+\fs18 combination as such.\par
+\fs18 \par
+\fs18   14. Revised Versions of this License.\par
+\fs18 \par
+\fs18   The Free Software Foundation may publish revised and/or new versions of\par
+\fs18 the GNU General Public License from time to time.  Such new versions will\par
+\fs18 be similar in spirit to the present version, but may differ in detail to\par
+\fs18 address new problems or concerns.\par
+\fs18 \par
+\fs18   Each version is given a distinguishing version number.  If the\par
+\fs18 Program specifies that a certain numbered version of the GNU General\par
+\fs18 Public License "or any later version" applies to it, you have the\par
+\fs18 option of following the terms and conditions either of that numbered\par
+\fs18 version or of any later version published by the Free Software\par
+\fs18 Foundation.  If the Program does not specify a version number of the\par
+\fs18 GNU General Public License, you may choose any version ever published\par
+\fs18 by the Free Software Foundation.\par
+\fs18 \par
+\fs18   If the Program specifies that a proxy can decide which future\par
+\fs18 versions of the GNU General Public License can be used, that proxy's\par
+\fs18 public statement of acceptance of a version permanently authorizes you\par
+\fs18 to choose that version for the Program.\par
+\fs18 \par
+\fs18   Later license versions may give you additional or different\par
+\fs18 permissions.  However, no additional obligations are imposed on any\par
+\fs18 author or copyright holder as a result of your choosing to follow a\par
+\fs18 later version.\par
+\fs18 \par
+\fs18   15. Disclaimer of Warranty.\par
+\fs18 \par
+\fs18   THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\par
+\fs18 APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\par
+\fs18 HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY\par
+\fs18 OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\par
+\fs18 THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\par
+\fs18 PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\par
+\fs18 IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\par
+\fs18 ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\par
+\fs18 \par
+\fs18   16. Limitation of Liability.\par
+\fs18 \par
+\fs18   IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\par
+\fs18 WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\par
+\fs18 THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\par
+\fs18 GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\par
+\fs18 USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\par
+\fs18 DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\par
+\fs18 PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\par
+\fs18 EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\par
+\fs18 SUCH DAMAGES.\par
+\fs18 \par
+\fs18   17. Interpretation of Sections 15 and 16.\par
+\fs18 \par
+\fs18   If the disclaimer of warranty and limitation of liability provided\par
+\fs18 above cannot be given local legal effect according to their terms,\par
+\fs18 reviewing courts shall apply local law that most closely approximates\par
+\fs18 an absolute waiver of all civil liability in connection with the\par
+\fs18 Program, unless a warranty or assumption of liability accompanies a\par
+\fs18 copy of the Program in return for a fee.\par
+\fs18 \par
+\fs18                      END OF TERMS AND CONDITIONS\par
+\fs18 \par
+\fs18             How to Apply These Terms to Your New Programs\par
+\fs18 \par
+\fs18   If you develop a new program, and you want it to be of the greatest\par
+\fs18 possible use to the public, the best way to achieve this is to make it\par
+\fs18 free software which everyone can redistribute and change under these terms.\par
+\fs18 \par
+\fs18   To do so, attach the following notices to the program.  It is safest\par
+\fs18 to attach them to the start of each source file to most effectively\par
+\fs18 state the exclusion of warranty; and each file should have at least\par
+\fs18 the "copyright" line and a pointer to where the full notice is found.\par
+\fs18 \par
+\fs18     <one line to give the program's name and a brief idea of what it does.>\par
+\fs18     Copyright (C) <year>  <name of author>\par
+\fs18 \par
+\fs18     This program is free software: you can redistribute it and/or modify\par
+\fs18     it under the terms of the GNU General Public License as published by\par
+\fs18     the Free Software Foundation, either version 3 of the License, or\par
+\fs18     (at your option) any later version.\par
+\fs18 \par
+\fs18     This program is distributed in the hope that it will be useful,\par
+\fs18     but WITHOUT ANY WARRANTY; without even the implied warranty of\par
+\fs18     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\par
+\fs18     GNU General Public License for more details.\par
+\fs18 \par
+\fs18     You should have received a copy of the GNU General Public License\par
+\fs18     along with this program.  If not, see <http://www.gnu.org/licenses/>.\par
+\fs18 \par
+\fs18 Also add information on how to contact you by electronic and paper mail.\par
+\fs18 \par
+\fs18   If the program does terminal interaction, make it output a short\par
+\fs18 notice like this when it starts in an interactive mode:\par
+\fs18 \par
+\fs18     <program>  Copyright (C) <year>  <name of author>\par
+\fs18     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\par
+\fs18     This is free software, and you are welcome to redistribute it\par
+\fs18     under certain conditions; type `show c' for details.\par
+\fs18 \par
+\fs18 The hypothetical commands `show w' and `show c' should show the appropriate\par
+\fs18 parts of the General Public License.  Of course, your program's commands\par
+\fs18 might be different; for a GUI interface, you would use an "about box".\par
+\fs18 \par
+\fs18   You should also get your employer (if you work as a programmer) or school,\par
+\fs18 if any, to sign a "copyright disclaimer" for the program, if necessary.\par
+\fs18 For more information on this, and how to apply and follow the GNU GPL, see\par
+\fs18 <http://www.gnu.org/licenses/>.\par
+\fs18 \par
+\fs18   The GNU General Public License does not permit incorporating your program\par
+\fs18 into proprietary programs.  If your program is a subroutine library, you\par
+\fs18 may consider it more useful to permit linking proprietary applications with\par
+\fs18 the library.  If this is what you want to do, use the GNU Lesser General\par
+\fs18 Public License instead of this License.  But first, please read\par
+\fs18 <http://www.gnu.org/philosophy/why-not-lgpl.html>.\par
+\fs18 \par
+}

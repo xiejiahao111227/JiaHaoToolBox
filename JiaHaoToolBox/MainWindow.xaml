@@ -21,6 +21,16 @@
 	mc:Ignorable="d">
     <FrameworkElement.Resources>
         <ResourceDictionary>
+            <!-- 侧边栏改为常驻展开后共 22 行，收紧行高才能在一屏内显示全部模块 -->
+            <Style x:Key="NavLeafItemStyle" BasedOn="{StaticResource SideMenuItemBaseStyle}" TargetType="hc:SideMenuItem">
+                <Setter Property="MinHeight" Value="30"/>
+                <Setter Property="Padding" Value="0,2,0,2"/>
+            </Style>
+            <Style x:Key="NavTopItemStyle" BasedOn="{StaticResource SideMenuItemHeaderBaseStyle}" TargetType="hc:SideMenuItem">
+                <Setter Property="MinHeight" Value="30"/>
+                <Setter Property="Padding" Value="0,2,0,2"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource NavLeafItemStyle}"/>
+            </Style>
             <DropShadowEffect
                 Color="Black"
                 Direction="315"
@@ -411,7 +421,7 @@
                             Cursor="Hand"
                             Click="CloseButton_Click" Margin="201,2,10,2" Grid.Column="1">
                             <Button.Content>
-                                <svg:SvgViewbox Source="images/关闭.svg" Width="12" Height="12" />
+                                <svg:SvgViewbox Source="images/win-close.svg" Width="12" Height="12" />
                             </Button.Content>
                             <Button.Style>
                                 <Style
@@ -453,7 +463,7 @@
                             Cursor="Hand"
                             Click="MinimizeButton_Click" Margin="177,2,34,2" Grid.Column="1">
                             <Button.Content>
-                                <svg:SvgViewbox Source="images/最小化.svg" Width="14" Height="15" />
+                                <svg:SvgViewbox Source="images/win-minimize.svg" Width="14" Height="15" />
                             </Button.Content>
                             <Button.Style>
                                 <Style
@@ -499,9 +509,10 @@
 					BorderBrush="#E0E0E0"
 					BorderThickness="0,0,1,0">
                         <ScrollViewer Background="#f8f9fa" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="SideMenuScrollViewer_PreviewMouseWheel">
-                            <hc:SideMenu ExpandMode="Freedom"
+                            <hc:SideMenu ExpandMode="ShowAll"
                                          Background="Transparent"
-                                         Margin="0,10,0,10"
+                                         ItemContainerStyle="{StaticResource NavTopItemStyle}"
+                                         Margin="0,4,0,4"
                                          FontFamily="Microsoft YaHei UI"
                                          FontSize="13"
                                          SelectionChanged="SideMenu_SelectionChanged"
@@ -512,15 +523,15 @@
                                     Header="主页"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/主页.svg" Width="16" Height="16"/>
+                                        <svg:SvgViewbox Source="images/home.svg" Width="16" Height="16"/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
                                 <hc:SideMenuItem
-                                    Name="ScreenMirrorButton" Visibility="Collapsed"
+                                    Name="ScreenMirrorButton"
                                     Header="投屏"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/投屏.svg" Width="16" Height="16"/>
+                                        <svg:SvgViewbox Source="images/screen-mirror.svg" Width="16" Height="16"/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
 
@@ -529,33 +540,6 @@
                                     <hc:SideMenuItem.Header>
                                         <Grid Width="90">
                                             <TextBlock Text="刷写功能" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <Path Width="10" Height="6" Stretch="Uniform" Stroke="#888" StrokeThickness="1.5" Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Data="M0,0 L5,5 L10,0">
-                                                <Path.RenderTransform>
-                                                    <RotateTransform Angle="0"/>
-                                                </Path.RenderTransform>
-                                                <Path.Style>
-                                                    <Style TargetType="Path">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=hc:SideMenuItem}}" Value="True">
-                                                                <DataTrigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="180" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.EnterActions>
-                                                                <DataTrigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="0" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.ExitActions>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Path.Style>
-                                            </Path>
                                         </Grid>
                                     </hc:SideMenuItem.Header>
                                     <hc:SideMenuItem
@@ -563,7 +547,7 @@
                                         Header="基本刷入"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/闪电.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/lightning.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -575,23 +559,23 @@
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="OugaFlashButton" Visibility="Collapsed"
+                                        Name="OugaFlashButton"
                                         Header="欧加线刷"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/扳手.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/wrench.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="EdlFlashButton" Visibility="Collapsed"
+                                        Name="EdlFlashButton"
                                         Header="EDL刷写"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/高通骁龙.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/snapdragon.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="ColorOSAssistantButton" Visibility="Collapsed"
+                                        Name="ColorOSAssistantButton"
                                         Header="降级助手"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
@@ -605,61 +589,34 @@
                                     <hc:SideMenuItem.Header>
                                         <Grid Width="90">
                                             <TextBlock Text="实用功能" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <Path Width="10" Height="6" Stretch="Uniform" Stroke="#888" StrokeThickness="1.5" Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Data="M0,0 L5,5 L10,0">
-                                                <Path.RenderTransform>
-                                                    <RotateTransform Angle="0"/>
-                                                </Path.RenderTransform>
-                                                <Path.Style>
-                                                    <Style TargetType="Path">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=hc:SideMenuItem}}" Value="True">
-                                                                <DataTrigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="180" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.EnterActions>
-                                                                <DataTrigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="0" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.ExitActions>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Path.Style>
-                                            </Path>
                                         </Grid>
                                     </hc:SideMenuItem.Header>
                                     <hc:SideMenuItem
-                                        Name="HiddenEnvironmentButton" Visibility="Collapsed"
+                                        Name="HiddenEnvironmentButton"
                                         Header="模块专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/拼图.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/puzzle.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="VioletDownload" Visibility="Collapsed"
+                                        Name="VioletDownload"
                                         Header="断点续传"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/下载.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/download.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="SystemZoneButton" Visibility="Collapsed"
+                                        Name="SystemZoneButton"
                                         Header="文件传输"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/文件传输.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/file-transfer.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="AutorootButton" Visibility="Collapsed"
+                                        Name="AutorootButton"
                                         Header="脱机修补"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
@@ -671,11 +628,11 @@
                                         Header="应用管理"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/应用.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/app.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="AndroidGeneralButton" Visibility="Collapsed"
+                                        Name="AndroidGeneralButton"
                                         Header="安卓通用"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
@@ -683,71 +640,44 @@
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="PayloadButton" Visibility="Collapsed"
+                                        Name="PayloadButton"
                                         Header="Payload"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/镜像文件.svg" Width="15" Height="18"/>
+                                            <svg:SvgViewbox Source="images/image-file.svg" Width="15" Height="18"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="BackupAssistantButton" Visibility="Collapsed"
+                                        Name="BackupAssistantButton"
                                         Header="备份助手"
                                         Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/备份.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/backup.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                 </hc:SideMenuItem>
 
                                 <!-- 刷机资源 -->
-                                <hc:SideMenuItem FontSize="13" Visibility="Collapsed">
+                                <hc:SideMenuItem FontSize="13">
                                     <hc:SideMenuItem.Header>
                                         <Grid Width="90">
                                             <TextBlock Text="刷机资源" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <Path Width="10" Height="6" Stretch="Uniform" Stroke="#888" StrokeThickness="1.5" Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Data="M0,0 L5,5 L10,0">
-                                                <Path.RenderTransform>
-                                                    <RotateTransform Angle="0"/>
-                                                </Path.RenderTransform>
-                                                <Path.Style>
-                                                    <Style TargetType="Path">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=hc:SideMenuItem}}" Value="True">
-                                                                <DataTrigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="180" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.EnterActions>
-                                                                <DataTrigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="0" Duration="0:0:0.2"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </DataTrigger.ExitActions>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Path.Style>
-                                            </Path>
                                         </Grid>
                                     </hc:SideMenuItem.Header>
                                     <hc:SideMenuItem
-                                        Name="DownloadZoneButton" Visibility="Collapsed"
+                                        Name="DownloadZoneButton"
                                         Header="下载专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/下载.svg" Width="16" Height="16"/>
+                                            <svg:SvgViewbox Source="images/download.svg" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
-                                        Name="RomDownload" Visibility="Collapsed"
+                                        Name="RomDownload"
                                         Header="Rom专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/云端下载.svg" Width="15" Height="17"/>
+                                            <svg:SvgViewbox Source="images/cloud-download.svg" Width="15" Height="17"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                 </hc:SideMenuItem>
@@ -758,7 +688,7 @@
                                     Header="关于"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/关于.svg" Width="16" Height="16" Cursor=""/>
+                                        <svg:SvgViewbox Source="images/about.svg" Width="16" Height="16" Cursor=""/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
                             </hc:SideMenu>
@@ -1062,31 +992,31 @@
                                                 <UniformGrid Columns="2" Margin="0,10,0,0">
                                                     <Button x:Name="RebootPhoneButton" Click="RebootPhoneButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/重启.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/reboot.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="系统" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToFastbootButton" Click="RebootToFastbootButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/闪电2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/lightning-2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="Fastboot" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToFastbootDButton" Click="RebootToFastbootDButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/向下.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/arrow-down.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="FastbootD" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToRecoveryButton" Click="RebootToRecoveryButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/修复.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/repair.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="Recovery" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootTo9008Button" Click="RebootTo9008Button_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/芯片、数据.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/chip-data.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="9008(EDL)" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1095,7 +1025,7 @@
                                                             Style="{StaticResource HomeActionButtonStyle}"
                                                             Margin="8,0,0,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/刷新.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="刷新设备" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1132,7 +1062,7 @@
                                                             Style="{StaticResource HomeToolButtonStyle}"
                                                             Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/切换.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/switch-slot.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="切换槽位" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1183,6 +1113,45 @@
 
                                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                                                     <TextBlock Text="保存设备信息" FontSize="13" FontWeight="Bold" Foreground="#FF7A5CC4" Cursor="Hand" PreviewMouseLeftButtonDown="SaveDeviceInfoText_PreviewMouseLeftButtonDown"/>
+                                                    <TextBlock Text="  |  " FontSize="13" Foreground="#FFB2BAC2"/>
+                                                    <TextBlock x:Name="LinkGuideTextBlock"
+                                                               FontSize="13"
+                                                               FontWeight="Bold"
+                                                               Foreground="#FFFF3400"
+                                                               Cursor="Hand"
+                                                               ToolTip="打开上游项目原作者站教程（violettool.top）"
+                                                               MouseLeftButtonUp="LinkGuideTextBlock_MouseLeftButtonUp" Text="上游教程">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Foreground" Value="#FF00BFFF"/>
+                                                                        <Setter Property="TextDecorations" Value="Underline"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                    <TextBlock Text="  |  " FontSize="13" Foreground="#FFB2BAC2"/>
+                                                    <TextBlock x:Name="ConnectionGuideTextBlock"
+                                                               Text="连接指南"
+                                                               FontSize="13"
+                                                               FontWeight="Bold"
+                                                               Foreground="#FF7A5CC4"
+                                                               Cursor="Hand"
+                                                               ToolTip="打开上游项目原作者站的设备连接指南"
+                                                               MouseLeftButtonUp="ConnectionGuideTextBlock_MouseLeftButtonUp">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Foreground" Value="#FF00BFFF"/>
+                                                                        <Setter Property="TextDecorations" Value="Underline"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
                                                     <TextBlock Text="  |  " FontSize="13" Foreground="#FFB2BAC2"/>
                                                     <TextBlock x:Name="Usb3PatchTextBlock"
                                                                Text="USB3.0补丁"
@@ -1549,7 +1518,7 @@
                                                             IsEnabled="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton}"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1580,7 +1549,7 @@
                                                             IsEnabled="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton}"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1610,13 +1579,15 @@
                                                                 Style="{StaticResource AutorootPrimaryButtonStyle}"
                                                                 Background="#FFC99AE4">
                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                                <svg:SvgViewbox Source="images/开始1.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/start-1.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="开始" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
                                                     </StackPanel>
 
-                                                    <StackPanel x:Name="MagiskAdvancedOptionsPanel" Visibility="Collapsed">
+                                                    <StackPanel x:Name="MagiskAdvancedOptionsPanel"
+                                                                IsEnabled="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton}"
+                                                                Visibility="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <TextBlock Style="{StaticResource AutorootPanelTitleStyle}" Margin="0,12,0,0">
                                                         <Run Text="高级选项"/><Run Language="zh-cn" Text="（默认即可）"/>
                                                         </TextBlock>
@@ -1689,6 +1660,13 @@
                                                              Text="0MB流量."
                                                              Foreground="#FF28A745"
                                                              FontWeight="Bold"/>
+                                                        <Run Text="   "/>
+                                                        <Hyperlink Click="LinkTutorial_Click"
+                                                                   ToolTip="打开上游项目官网 violettool.top，含刷机教程与常见问题">上游官网</Hyperlink>
+                                                        <Run Text="   "/>
+                                                        <Hyperlink NavigateUri="https://violettool.top/others/donate.html"
+                                                                   ToolTip="赞赏上游项目原作者，与本修改版无关"
+                                                                   RequestNavigate="AutorootDonateLink_RequestNavigate">赞赏原作者</Hyperlink>
                                                     </TextBlock>
                                                     <ProgressBar x:Name="AutorootProgressBar"
                                                                  Grid.Row="1"
@@ -1776,7 +1754,7 @@
                                                             Click="GkiSelectBootButton_Click"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1802,7 +1780,7 @@
                                                             Click="SelectAnykernel3Button_Click"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1923,7 +1901,7 @@
                                                                 Click="AvbSelectBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1951,7 +1929,7 @@
                                                                 Click="AvbSelectInitBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1977,7 +1955,7 @@
                                                                 Click="AvbSelectVbmetaButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2005,7 +1983,7 @@
                                                                 Click="AvbSelectAospVbmetaButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2031,7 +2009,7 @@
                                                                 Click="AvbSelectAospBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2057,7 +2035,7 @@
                                                                 Click="AvbSelectAospRecoveryButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2083,7 +2061,7 @@
                                                                 Click="AvbSelectAospVbmetaSystemButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2197,7 +2175,7 @@
                                                                 Click="ForcePortraitButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/横屏转竖屏.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <svg:SvgViewbox Source="images/landscape-to-portrait.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="强制竖屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2241,7 +2219,7 @@
                                                                 Click="ForceLandscapeButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/竖屏转横屏.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <svg:SvgViewbox Source="images/portrait-to-landscape.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="强制横屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2285,7 +2263,7 @@
                                                                 Click="AutoRotateButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/自动旋转.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <svg:SvgViewbox Source="images/auto-rotate.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="自动旋转" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2329,7 +2307,7 @@
                                                                 Click="ScreenshotButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/ic_截屏.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <svg:SvgViewbox Source="images/ic-screenshot.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="截屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2396,7 +2374,39 @@
                                                                     </Setter>
                                                                 </Style>
                                                             </GroupBox.Style>
-                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                                <WrapPanel.Resources>
+                                                                    <Style x:Key="MirrorKeyButtonStyle" TargetType="{x:Type Button}">
+                                                                        <Setter Property="Background" Value="White"/>
+                                                                        <Setter Property="Foreground" Value="#FF1F1F1F"/>
+                                                                        <Setter Property="FontSize" Value="14"/>
+                                                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                                        <Setter Property="BorderBrush" Value="#FFE0E0E0"/>
+                                                                        <Setter Property="BorderThickness" Value="1"/>
+                                                                        <Setter Property="Width" Value="95"/>
+                                                                        <Setter Property="Height" Value="32"/>
+                                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                                        <Setter Property="Margin" Value="0,0,8,8"/>
+                                                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                                    <Border Background="{TemplateBinding Background}"
+                                                                                            CornerRadius="6"
+                                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                                                                            <Setter Property="Background" Value="#FFF1F7FD"/>
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </WrapPanel.Resources>
                                                                 <Button
                                                                 Name="BackKeyButton"
                                                                 Background="White"
@@ -2413,7 +2423,7 @@
                                                                 ToolTip="返回键"
                                                                 Click="BackKeyButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/返回.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/nav-back.svg"/>
                                                                         <TextBlock Text="返回键" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2455,7 +2465,7 @@
                                                                                                 Margin="0,0,8,0"
                                                                                                 Click="HomeKeyButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/圆圈.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/circle.svg"/>
                                                                         <TextBlock Text="主页键" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2506,7 +2516,7 @@
                                                         ToolTip="多任务"
                                                         Click="RecentAppsButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/icon_多任务.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/icon-recents.svg"/>
                                                                         <TextBlock Text="多任务" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2557,7 +2567,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="LockScreenButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/锁屏.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
                                                                         <TextBlock Text="锁屏" VerticalAlignment="Center"/>
                                                                     </StackPanel>
 
@@ -2593,7 +2603,35 @@
                                                                         </Style>
                                                                     </FrameworkElement.Style>
                                                                 </Button>
-                                                            </StackPanel>
+                                                                <Button Name="PowerKeyButton"
+                                                                        Style="{StaticResource MirrorKeyButtonStyle}"
+                                                                        ToolTip="向设备发送电源键（keyevent 26）"
+                                                                        Click="PowerKeyButton_Click">
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/power.svg"/>
+                                                                        <TextBlock Text="电源键" VerticalAlignment="Center"/>
+                                                                    </StackPanel>
+                                                                </Button>
+                                                                <Button Name="ScreenOffButton"
+                                                                        Style="{StaticResource MirrorKeyButtonStyle}"
+                                                                        ToolTip="仅息屏不锁屏（keyevent 223）"
+                                                                        Click="ScreenOffButton_Click">
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
+                                                                        <TextBlock Text="息屏" VerticalAlignment="Center"/>
+                                                                    </StackPanel>
+                                                                </Button>
+                                                                <Button Name="ScreenOnButton"
+                                                                        Style="{StaticResource MirrorKeyButtonStyle}"
+                                                                        Margin="0"
+                                                                        ToolTip="点亮屏幕（keyevent 224）"
+                                                                        Click="ScreenOnButton_Click">
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lightning.svg"/>
+                                                                        <TextBlock Text="亮屏" VerticalAlignment="Center"/>
+                                                                    </StackPanel>
+                                                                </Button>
+                                                            </WrapPanel>
                                                         </GroupBox>
                                                         <!-- 音量调节 GroupBox -->
                                                         <GroupBox Header="音量调节" Background="#FFFFFFFF" Margin="0" Padding="12" BorderThickness="1" BorderBrush="#FFE6ECF3" FontSize="16" FontWeight="Bold" Foreground="#FF2F3A45" HorizontalAlignment="Left" Width="432">
@@ -2649,7 +2687,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeUpButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/音量.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
                                                                         <TextBlock Text="音量+" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2687,7 +2725,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeDownButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/音量.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
                                                                         <TextBlock Text="音量-" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2725,7 +2763,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeMuteButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/静音.svg"/>
+                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/mute.svg"/>
                                                                         <TextBlock Text="静音" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2856,21 +2894,25 @@
                                                                      GroupName="WindowSize" 
                                                                      IsChecked="True" 
                                                                      Tag="90"
+                                                                     Checked="WindowSizeRadio_Checked"
                                                                      Margin="0,0,15,0"/>
                                                         <RadioButton x:Name="RadioSize80" 
                                                                      Content="80%" 
                                                                      GroupName="WindowSize" 
                                                                      Tag="80"
+                                                                     Checked="WindowSizeRadio_Checked"
                                                                      Margin="0,0,15,0"/>
                                                         <RadioButton x:Name="RadioSize70" 
                                                                      Content="70%" 
                                                                      GroupName="WindowSize" 
                                                                      Tag="70"
+                                                                     Checked="WindowSizeRadio_Checked"
                                                                      Margin="0,0,15,0"/>
                                                         <RadioButton x:Name="RadioSize60" 
                                                                      Content="60%" 
                                                                      GroupName="WindowSize" 
-                                                                     Tag="60"/>
+                                                                     Tag="60"
+                                                                     Checked="WindowSizeRadio_Checked"/>
                                                     </StackPanel>
 
                                                     <!-- 第二行：自定义大小选项和输入框 -->
@@ -2879,20 +2921,25 @@
                                                                      Content="自定义大小" 
                                                                      GroupName="WindowSize" 
                                                                      Tag="custom"
+                                                                     Checked="WindowSizeRadio_Checked"
                                                                      Margin="0,0,15,0"/>
-                                                        <TextBox x:Name="CustomWidthTextBox"
+                                                        <StackPanel x:Name="CustomSizePanel"
+                                                                    Orientation="Horizontal"
+                                                                    Visibility="Collapsed">
+                                                            <TextBox x:Name="CustomWidthTextBox"
                                                                  Width="70"
                                                                  Height="28"
                                                                  VerticalContentAlignment="Center"
                                                                  Text="1080"/>
-                                                        <TextBlock Text=" × " 
+                                                            <TextBlock Text=" × " 
                                                                    VerticalAlignment="Center"
                                                                    Margin="5,0"/>
-                                                        <TextBox x:Name="CustomHeightTextBox"
+                                                            <TextBox x:Name="CustomHeightTextBox"
                                                                  Width="70"
                                                                  Height="28"
                                                                  VerticalContentAlignment="Center"
                                                                  Text="1920"/>
+                                                        </StackPanel>
                                                     </StackPanel>
                                                 </StackPanel>
                                             </GroupBox>
@@ -2912,7 +2959,7 @@
                                                 Click="StartMirrorButton_Click" BorderBrush="#FFF8F9FA">
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/开始1.svg" Width="18" Height="18" Margin="0,0,6,0"/>
+                                                            <svg:SvgViewbox Source="images/start-1.svg" Width="18" Height="18" Margin="0,0,6,0"/>
                                                             <TextBlock Text="开始投屏" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button.Content>
@@ -2948,7 +2995,7 @@
                                                 Click="StopMirrorButton_Click" Margin="10,0,0,0">
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/暂停.svg" Width="18" Height="18" Margin="0,0,6,0"/>
+                                                            <svg:SvgViewbox Source="images/pause.svg" Width="18" Height="18" Margin="0,0,6,0"/>
                                                             <TextBlock Text="结束投屏" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button.Content>
@@ -3368,7 +3415,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -3401,7 +3448,7 @@
                                                     Click="FlashBootButton_Click"
                                                     Style="{StaticResource BasicFlashAccentButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/闪电2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/lightning-2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="开始刷入" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3426,7 +3473,7 @@
                                                 ToolTip="前两个为解锁指令 后两个为回锁指令"
                                                 Style="{StaticResource BasicFlashAccentButtonStyle}">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/刷新.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="执行指令" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -3471,7 +3518,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -3509,7 +3556,7 @@
                                                     Click="StartXiaomiFlashButton_Click"
                                                     Style="{StaticResource BasicFlashAccentButtonStyle}" Margin="27,39,-1,0">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/数据线.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/data-cable.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="开始线刷" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3523,13 +3570,13 @@
                                             <UniformGrid Margin="0,12,0,0" Columns="2">
                                                 <Button x:Name="FormatDeviceButton" Margin="0,0,8,8" Click="FormatDeviceButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="恢复出厂设置">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/格式化SD卡.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/format-sdcard.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="格式化设备【双清】" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="EraseGoogleLockButton" Margin="0,0,0,8" Click="EraseGoogleLockButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="解决安卓15无法安装应用">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/谷歌.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/google.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="擦除谷歌锁" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3541,25 +3588,25 @@
                                                 </Button>
                                                 <Button x:Name="EnableMiuiUsbButton" Margin="0,0,0,8" Click="EnableMiuiUsbButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="需ROOT">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/icon-小米归属.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/icon-xiaomi.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="强开小米USB安全设置" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="ReadOnePlusDdrButton" Margin="0,0,8,8" Click="ReadOnePlusDdrButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/闪存.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/flash-mem.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="ADB读一加DDR版本" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="EnableDiagPortButton" Margin="0,0,0,8" Click="EnableDiagPortButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="需ROOT">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/基带.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/baseband.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock VerticalAlignment="Center"><Run Language="zh-cn" Text="ADB"/><Run Text="强开基带调试端口"/></TextBlock>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="SwitchToMtpButton" Margin="0,0,8,0" Click="SwitchToMtpButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/文件传输.svg" Width="14" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/file-transfer.svg" Width="14" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="ADB切换文件传输" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3569,7 +3616,7 @@
                                                     ToolTip="用于分析OCDT中的项目号是否为空"
                                                     Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/镜像文件.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <svg:SvgViewbox Source="images/image-file.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock VerticalAlignment="Center"><Run Text="欧加真"/><Run Text="OCDT"/><Run Language="zh-cn" Text="分析"/></TextBlock>
                                                     </StackPanel>
                                                 </Button>
@@ -3844,7 +3891,7 @@
                                                 Style="{StaticResource FastbootPrimaryButtonStyle}"
                                                 Width="84" BorderBrush="#FFE6E6E6" Background="skyblue">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -4025,7 +4072,7 @@
                                                                         </Style>
                                                                     </CheckBox.Style>
                                                                 </CheckBox>
-                                                                <svg:SvgViewbox Source="images/盾牌.svg"
+                                                                <svg:SvgViewbox Source="images/shield.svg"
                                                                                 Width="16"
                                                                                 Height="16"
                                                                                 HorizontalAlignment="Center"
@@ -4108,6 +4155,22 @@
                                                                     </Style>
                                                                 </TextBlock.Style>
                                                             </TextBlock>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="文件" Width="56">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Button Content="选择"
+                                                                    Width="46"
+                                                                    Height="22"
+                                                                    FontSize="11"
+                                                                    Padding="0"
+                                                                    HorizontalAlignment="Center"
+                                                                    VerticalAlignment="Center"
+                                                                    ToolTip="为该分区指定镜像文件"
+                                                                    Style="{StaticResource FastbootSecondaryButtonStyle}"
+                                                                    Click="SelectFileButton_Click"/>
                                                         </DataTemplate>
                                                     </DataGridTemplateColumn.CellTemplate>
                                                 </DataGridTemplateColumn>
@@ -4231,6 +4294,7 @@
                             <Grid Grid.Column="1" Grid.Row="0" Margin="6,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
                                 <!-- Log -->
@@ -4245,6 +4309,42 @@
                                             <FlowDocument PagePadding="0" ColumnWidth="10000" ColumnGap="0" TextAlignment="Left" LineHeight="19"/>
                                         </RichTextBox>
                                     </Grid>
+                                </GroupBox>
+
+                                <!-- 手动命令 -->
+                                <GroupBox Grid.Row="1"
+                                          Header="手动命令"
+                                          Style="{StaticResource FastbootCardGroupBoxStyle}"
+                                          Padding="10,6,10,10"
+                                          Margin="-5,6,0,0">
+                                    <DockPanel LastChildFill="True">
+                                        <Button x:Name="ClearFastbootLogButton"
+                                                DockPanel.Dock="Right"
+                                                Content="清空日志"
+                                                Width="76"
+                                                Height="28"
+                                                Margin="6,0,0,0"
+                                                FontSize="12"
+                                                Style="{StaticResource FastbootSecondaryButtonStyle}"
+                                                ToolTip="清空上方执行日志"
+                                                Click="ClearFastbootLogButton_Click"/>
+                                        <Button x:Name="ExecuteFastbootCommandButton"
+                                                DockPanel.Dock="Right"
+                                                Content="执行"
+                                                Width="56"
+                                                Height="28"
+                                                Margin="6,0,0,0"
+                                                FontSize="12"
+                                                Style="{StaticResource FastbootPrimaryButtonStyle}"
+                                                Click="ExecuteFastbootCommandButton_Click"/>
+                                        <TextBox x:Name="FastbootCommandTextBox"
+                                                 Height="28"
+                                                 FontFamily="Cascadia Mono,Microsoft YaHei UI"
+                                                 FontSize="12"
+                                                 VerticalContentAlignment="Center"
+                                                 ToolTip="输入不含 fastboot 的命令行，例如 getvar all；仅等待 10 秒，适合查询类命令"
+                                                 KeyUp="FastbootCommandTextBox_KeyUp"/>
+                                    </DockPanel>
                                 </GroupBox>
                             </Grid>
 
@@ -4383,7 +4483,7 @@
                             <Button x:Name="SelectHiddenRootZipButton" HorizontalAlignment="Left" Margin="375,13,0,0" VerticalAlignment="Top" Width="84" Click="SelectHiddenRootZipButton_Click" Style="{StaticResource FastbootPrimaryButtonStyle}" BorderBrush="#FFE6E6E6" Background="SkyBlue">
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                        <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                         <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                     </StackPanel>
                                 </Button.Content>
@@ -4548,7 +4648,7 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="0">
-                                                        <svg:SvgViewbox Source="images/压缩包.svg" Width="20" Height="20" Margin="0,0,8,0"/>
+                                                        <svg:SvgViewbox Source="images/archive.svg" Width="20" Height="20" Margin="0,0,8,0"/>
                                                         <TextBlock Text="{Binding FileName}" VerticalAlignment="Center" FontFamily="Microsoft YaHei UI" FontSize="12" Foreground="#FF334155"/>
                                                     </StackPanel>
                                                     <CheckBox Grid.Column="1"
@@ -4565,7 +4665,7 @@
                                     <TextBlock HorizontalAlignment="Left" Margin="0,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" FontSize="12" Foreground="#FF64748B" RenderTransformOrigin="0.497,0.824" Width="231"><Run Text="支持自动过滤模块文件，"/><Run Language="zh-cn" Text="排除无关多余"/><Run Text="文件"/></TextBlock>
                                     <Button HorizontalAlignment="Left" Margin="281,291,0,0" VerticalAlignment="Top" Width="84" BorderBrush="#FFE6E6E6" Background="SkyBlue" Click="SelectModuleButton_Click" Style="{StaticResource FastbootPrimaryButtonStyle}" ToolTip="手动选择模块文件">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                         </StackPanel>
                                     </Button>
@@ -4985,7 +5085,7 @@
                                                             Height="36"
                                                             Style="{StaticResource VioletActionButtonStyle}">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5060,7 +5160,7 @@
                                                             Style="{StaticResource VioletActionButtonStyle}"
                                                             Margin="0,0,8,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/向下.svg" Width="14" Height="14" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/arrow-down.svg" Width="14" Height="14" Margin="0,0,5,0"/>
                                                             <TextBlock Text="开始下载" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5070,7 +5170,7 @@
                                                             Margin="4,0,4,0" Foreground="White" BorderBrush="#FFFFA7A7" Background="#FFFFA7A7">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                             <Grid Width="14" Height="14" Margin="0,0,5,0">
-                                                                <svg:SvgViewbox Source="images/暂停.svg" Width="14" Height="14">
+                                                                <svg:SvgViewbox Source="images/pause.svg" Width="14" Height="14">
                                                                     <svg:SvgViewbox.Style>
                                                                         <Style TargetType="svg:SvgViewbox">
                                                                             <Setter Property="Visibility" Value="Visible"/>
@@ -5082,7 +5182,7 @@
                                                                         </Style>
                                                                     </svg:SvgViewbox.Style>
                                                                 </svg:SvgViewbox>
-                                                                <svg:SvgViewbox Source="images/暂停深色.svg" Width="14" Height="14">
+                                                                <svg:SvgViewbox Source="images/pause-dark.svg" Width="14" Height="14">
                                                                     <svg:SvgViewbox.Style>
                                                                         <Style TargetType="svg:SvgViewbox">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -5104,7 +5204,7 @@
                                                             Margin="8,0,0,0" Foreground="White" Background="#FFFFD398" BorderBrush="#FFFFD398">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                             <Grid Width="14" Height="14" Margin="0,0,5,0">
-                                                                <svg:SvgViewbox Source="images/开始1.svg" Width="14" Height="14">
+                                                                <svg:SvgViewbox Source="images/start-1.svg" Width="14" Height="14">
                                                                     <svg:SvgViewbox.Style>
                                                                         <Style TargetType="svg:SvgViewbox">
                                                                             <Setter Property="Visibility" Value="Visible"/>
@@ -5116,7 +5216,7 @@
                                                                         </Style>
                                                                     </svg:SvgViewbox.Style>
                                                                 </svg:SvgViewbox>
-                                                                <svg:SvgViewbox Source="images/开始1深色.svg" Width="14" Height="14">
+                                                                <svg:SvgViewbox Source="images/start-1-dark.svg" Width="14" Height="14">
                                                                     <svg:SvgViewbox.Style>
                                                                         <Style TargetType="svg:SvgViewbox">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -5158,7 +5258,7 @@
                                                             Style="{StaticResource VioletAccentButtonStyle}"
                                                             Height="44">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/开始1.svg" Width="14" Height="14" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/start-1.svg" Width="14" Height="14" Margin="0,0,5,0"/>
                                                             <TextBlock Text="使用新链接继续" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5279,7 +5379,7 @@
                                             <Button VerticalAlignment="Top" Width="105" Click="LoadSystemZoneLocationButton_Click" Height="36" Background="#FFD39AF3" Foreground="White">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/加载.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/loading.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="加载目录"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5287,7 +5387,7 @@
                                             <Button VerticalAlignment="Top" Width="130" Height="36" Background="#FFD39AF3" Foreground="White" Margin="10,0,0,0" Click="Button_Click_1" Tag="传入文件到手机">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/向下.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/arrow-down.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock><Run Text="传入文件到"/><Run Language="zh-cn" Text="设备"/></TextBlock>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5295,7 +5395,7 @@
                                             <Button VerticalAlignment="Top" Width="130" Height="36" Background="#FFD39AF3" Foreground="White" Margin="10,0,0,0" Click="Button_Click_2">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/向上.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/arrow-up.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="传出文件到电脑" Width="86"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5303,7 +5403,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FF9A9AF3" Foreground="White" Margin="10,0,0,0" Click="RefreshButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/刷新.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="刷新目录"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5311,7 +5411,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FF9A9AF3" Foreground="White" Margin="10,0,0,0" Click="BackButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/向左.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/arrow-left.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="返回上级"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5327,7 +5427,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FFFD8383" Foreground="White" Margin="10,0,0,0" Click="DeleteSelectedFilesButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/卸载.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <svg:SvgViewbox Source="images/uninstall.svg" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="删除"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5445,7 +5545,7 @@
                                                                             </Path.Style>
                                                                         </Path>
                                                                         <!-- 压缩包图标（.7z .zip .rar .tgz） -->
-                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/压缩包.svg">
+                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/archive.svg">
                                                                             <svg:SvgViewbox.Style>
                                                                                 <Style TargetType="svg:SvgViewbox">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -5458,7 +5558,7 @@
                                                                             </svg:SvgViewbox.Style>
                                                                         </svg:SvgViewbox>
                                                                         <!-- 镜像文件图标（.img） -->
-                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/镜像文件.svg">
+                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/image-file.svg">
                                                                             <svg:SvgViewbox.Style>
                                                                                 <Style TargetType="svg:SvgViewbox">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -5488,7 +5588,7 @@
                                                                         </Style>
                                                                     </Image.Style>
                                                                 </Image>
-                                                                <svg:SvgViewbox Source="images/对.svg" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="10">
+                                                                <svg:SvgViewbox Source="images/check.svg" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="10">
                                                                     <svg:SvgViewbox.Style>
                                                                         <Style TargetType="svg:SvgViewbox">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -5765,10 +5865,11 @@
                                                             Height="20"
                                                             FontSize="14"
                                                             FontFamily="Segoe UI Black"/>
-                                                            <svg:SvgViewbox
-                                                            Source="images/neko.svg"
+                                                            <Image
+                                                            Source="images/neko.png"
                                                             Width="90"
                                                             Height="79"
+                                                            Stretch="Uniform"
                                                             Opacity="0.9"
                                                             Margin="0,20,0,0"
                                                             MouseLeftButtonDown="NekoDownloaderIcon_MouseLeftButtonDown"/>
@@ -5803,10 +5904,11 @@
                                                             Height="20"
                                                             FontSize="14"
                                                             FontFamily="Segoe UI Black"/>
-                                                            <svg:SvgViewbox
-                                                            Source="images/ndm.svg"
+                                                            <Image
+                                                            Source="images/ndm.png"
                                                             Width="90"
                                                             Height="79"
+                                                            Stretch="Uniform"
                                                             Opacity="0.9"
                                                             Margin="0,20,0,0"
                                                             MouseLeftButtonDown="NdmDownloaderIcon_MouseLeftButtonDown"/>
@@ -5881,8 +5983,68 @@
                                                 Background="White"
                                                 Effect="{StaticResource DropShadowEffect}">
                                                     <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="14,12,14,2">
+                                                            <TextBlock Text="常用驱动直链："
+                                                                       VerticalAlignment="Center"
+                                                                       FontSize="13"
+                                                                       Foreground="#FF666666"/>
+                                                            <Button Content="安卓通用驱动"
+                                                                    Margin="0,0,8,0"
+                                                                    Padding="10,0"
+                                                                    Height="28"
+                                                                    FontSize="12"
+                                                                    Background="#FFC99AE4"
+                                                                    BorderBrush="#FFC99AE4"
+                                                                    Foreground="White"
+                                                                    ToolTip="上游项目整理的安卓通用驱动（蓝奏云分享）"
+                                                                    Click="AndroidDriverButton_Click"/>
+                                                            <Button Content="MTK 驱动"
+                                                                    Margin="0,0,8,0"
+                                                                    Padding="10,0"
+                                                                    Height="28"
+                                                                    FontSize="12"
+                                                                    Background="#FFC99AE4"
+                                                                    BorderBrush="#FFC99AE4"
+                                                                    Foreground="White"
+                                                                    ToolTip="联发科 MTK VCOM 驱动（蓝奏云分享）"
+                                                                    Click="MTKDriverButton_Click"/>
+                                                            <Button Content="高通驱动"
+                                                                    Margin="0,0,8,0"
+                                                                    Padding="10,0"
+                                                                    Height="28"
+                                                                    FontSize="12"
+                                                                    Background="#FFC99AE4"
+                                                                    BorderBrush="#FFC99AE4"
+                                                                    Foreground="White"
+                                                                    ToolTip="高通 9008 / QDLoader 驱动（蓝奏云分享）"
+                                                                    Click="QualcommDriverButton_Click"/>
+                                                            <Button Content="LibUSB 驱动"
+                                                                    Margin="0,0,8,0"
+                                                                    Padding="10,0"
+                                                                    Height="28"
+                                                                    FontSize="12"
+                                                                    Background="#FFC99AE4"
+                                                                    BorderBrush="#FFC99AE4"
+                                                                    Foreground="White"
+                                                                    ToolTip="libusb-win32 驱动，EDL 底层读写需要（蓝奏云分享）"
+                                                                    Click="LibUSBDriverButton_Click"/>
+                                                            <Button Content="OPPO 驱动"
+                                                                    Padding="10,0"
+                                                                    Height="28"
+                                                                    FontSize="12"
+                                                                    Background="#FFC99AE4"
+                                                                    BorderBrush="#FFC99AE4"
+                                                                    Foreground="White"
+                                                                    ToolTip="OPPO 专属 USB 驱动（蓝奏云分享）"
+                                                                    Click="OPPODriverButton_Click"/>
+                                                        </StackPanel>
                                                         <ListBox
                                                         x:Name="DriverFileListBox"
+                                                        Grid.Row="1"
                                                         FontSize="14"
                                                         HorizontalContentAlignment="Stretch"
                                                         BorderThickness="0"
@@ -5917,6 +6079,7 @@
                                                         </ListBox>
                                                         <Grid
                                                         x:Name="DriverLoadingView"
+                                                        Grid.RowSpan="2"
                                                         Visibility="Collapsed"
                                                         Background="Transparent">
                                                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -5994,7 +6157,7 @@
                                     <Button Height="30" Name="BrowseInputButton" Click="BrowseInputButton_Click" Grid.Column="1" Grid.ColumnSpan="2" Width="87" HorizontalAlignment="Left" Margin="351,0,0,0" Background="SkyBlue" Foreground="White" BorderBrush="#FFCFD1D1">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="14" Height="14" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="14" Height="14" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -6007,7 +6170,7 @@
                                     <Button Grid.Row="1" Grid.Column="1" Height="30" Margin="351,10,0,0" Name="BrowseOutputButton" Click="BrowseOutputButton_Click" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="87" HorizontalAlignment="Left" BorderBrush="#FFCFD1D1" Background="SkyBlue" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="14" Height="14" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="14" Height="14" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -6559,9 +6722,9 @@
                                                 Click="RomSelectCopyLinksButton_Click" HorizontalAlignment="Left"/>
                                         <CheckBox x:Name="C16DynamicCheckBox"
                                                   Content="C16动态解析"
+                                                  ToolTip="开启后按需从 Rom 专区数据源动态解析 C16（OPPO / 一加 / 真我）机型列表"
                                                   VerticalAlignment="Center"
-                                                  Margin="4,0,0,0"
-                                                  Visibility="Collapsed"
+                                                  Margin="10,0,0,0"
                                                   IsChecked="False"
                                                   Checked="C16DynamicCheckBox_Checked"
                                                   Unchecked="C16DynamicCheckBox_Unchecked"/>
@@ -6928,7 +7091,7 @@
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="130" />
-                                        <RowDefinition Height="0" />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
@@ -6967,7 +7130,7 @@
                                                     Background="SkyBlue"
                                                     Click="EdlLoaderBrowseButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -6986,7 +7149,7 @@
                                                     Background="SkyBlue"
                                                     Click="EdlFlashPackBrowseButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -7039,8 +7202,21 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Margin="0,0,0,5"
-                                    Visibility="Collapsed"
                                     Click="EdlPartSelectAllCheckBox_Click" />
+
+                                    <Button
+                                    x:Name="EdlDevMgrButton"
+                                    Content="设备管理器"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Width="94"
+                                    Height="26"
+                                    Margin="0,0,0,5"
+                                    FontSize="11"
+                                    ToolTip="设备未出现在端口列表时，打开 Windows 设备管理器检查 9008 端口驱动"
+                                    Style="{StaticResource EdlSecondaryButtonStyle}"
+                                    Click="EdlDevMgrButton_Click" />
 
                                     <!-- Partition Table GroupBox -->
                                     <GroupBox
@@ -7069,6 +7245,17 @@
                                                     CornerRadius="5"
                                                     Margin="0,0,0,8">
                                                     <DockPanel LastChildFill="True">
+                                                        <Button x:Name="EdlPartitionSearchClearButton"
+                                                                DockPanel.Dock="Right"
+                                                                Content="清除"
+                                                                Width="44"
+                                                                Height="22"
+                                                                Margin="0,0,4,0"
+                                                                FontSize="11"
+                                                                Padding="0"
+                                                                ToolTip="清空分区筛选条件并恢复完整分区表"
+                                                                Style="{StaticResource EdlSecondaryButtonStyle}"
+                                                                Click="EdlPartitionSearchClearButton_Click"/>
                                                         <ComboBox
                                                         x:Name="EdlPartitionSearchComboBox"
                                                         Height="28"
@@ -7240,7 +7427,7 @@
                                                                             </CheckBox.Style>
                                                                         </CheckBox>
                                                                         <svg:SvgViewbox
-                                                                        Source="images/盾牌.svg"
+                                                                        Source="images/shield.svg"
                                                                         Width="16"
                                                                         Height="16"
                                                                         HorizontalAlignment="Center"
@@ -7790,7 +7977,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -7825,7 +8012,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -7860,7 +8047,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/文件夹.svg"
+                                                            <svg:SvgViewbox Source="images/folder.svg"
                                                                             Width="16"
                                                                             Height="16"
                                                                             Margin="0,0,5,0"/>
@@ -8232,7 +8419,9 @@
                                                        Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap" Margin="0,0,0,6"/>
                                             <TextBlock Text="原始项目地址：github.com/Smart-Paocai/VioletToolBox"
                                                        Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap" Margin="0,0,0,6"/>
-                                            <TextBlock Text="主要修改：更换品牌标识与程序名称；首版功能入口收敛为刷机与设备管理相关模块；移除原作者的个人形象素材、打赏收款码与社交账号入口；断开对上游服务器的公告拉取与启动次数上报。"
+                                            <TextBlock Text="本分支版本 测试版 V1.2（OS1.0.2.0.UMNMIXM），代码基线为上游 V3.7-260814-R56。"
+                                                       Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                            <TextBlock Text="主要修改：更换品牌标识与程序名称；应用数据目录独立；断开对上游服务器的公告拉取与启动次数上报；关于页的上游作者署名、收款码与账号入口均标注为上游归属。"
                                                        Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </Border>
@@ -8246,6 +8435,168 @@
                                             <TextBlock Text="完整条款见项目根目录下的 LICENSE 文件。"
                                                        Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap"/>
                                         </StackPanel>
+                                    </Border>
+
+                                    <!-- 上游项目与作者归属 -->
+                                    <TextBlock Text="上游项目与作者" Style="{StaticResource AboutSectionTitleStyle}"/>
+                                    <Border Style="{StaticResource AboutCardStyle}" Margin="0,0,0,14">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Ellipse Width="64" Height="64" VerticalAlignment="Top">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="pack://application:,,,/paocai.jpg"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+
+                                            <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="泡菜" FontSize="18" FontWeight="SemiBold" Foreground="#FF1F2328"/>
+                                                <Border Background="#FFDDF4FF" BorderBrush="#FF54AEFF" BorderThickness="1" CornerRadius="6" Padding="9,4" HorizontalAlignment="Left" Margin="0,6,0,8">
+                                                    <TextBlock Text="上游项目原作者 &amp; 前后端开发 &amp; 核心架构" FontSize="12" Foreground="#FF0969DA" FontWeight="SemiBold"/>
+                                                </Border>
+                                                <TextBlock Text="嘉豪工具箱的全部代码架构与刷机功能均源自其开发的开源项目紫罗兰工具箱（VioletToolBox）。以下账号与收款渠道属于上游原作者，本修改版与其无隶属或背书关系。"
+                                                           Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- 支持原作者与上游社区 -->
+                                    <Border Style="{StaticResource AboutCardStyle}" Margin="0,0,0,14">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="24"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="24"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="支持原作者" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328"/>
+                                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <StackPanel Margin="0,0,12,0">
+                                                        <Border Width="132" Height="132" CornerRadius="6" BorderBrush="#FFD0D7DE" BorderThickness="1" Background="#FFF6F8FA" Padding="6">
+                                                            <Image Source="zfb.png" Stretch="Uniform"/>
+                                                        </Border>
+                                                        <TextBlock Text="支付宝" FontSize="12" Foreground="#FF0969DA" HorizontalAlignment="Center" Margin="0,7,0,0" FontWeight="SemiBold"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <Border Width="132" Height="132" CornerRadius="6" BorderBrush="#FFD0D7DE" BorderThickness="1" Background="#FFF6F8FA" Padding="6">
+                                                            <Image Source="wx.png" Stretch="Uniform"/>
+                                                        </Border>
+                                                        <TextBlock Text="微信" FontSize="12" Foreground="#FF1A7F37" HorizontalAlignment="Center" Margin="0,7,0,0" FontWeight="SemiBold"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Background="#FFD0D7DE"/>
+
+                                            <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Center">
+                                                <TextBlock Text="上游账号与社区" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" Margin="0,0,0,8"/>
+                                                <TextBlock Text="本工具沿用其开源代码，如需赞赏原作者、反馈上游问题或查阅完整教程，可通过以下入口前往。"
+                                                           Style="{StaticResource AboutBodyTextStyle}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="哔哩哔哩：泡菜学不会（上游作者）" Tag="https://b23.tv/wk4Qp7a" Click="SocialMediaButton_Click">
+                                                        <svg:SvgViewbox Source="images/bilibili.svg" Width="24" Height="24"/>
+                                                    </Button>
+                                                    <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="酷安：泡菜学不会（上游作者）" Tag="http://www.coolapk.com/u/33872028" Click="SocialMediaButton_Click">
+                                                        <svg:SvgViewbox Source="images/coolapk.svg" Width="24" Height="24"/>
+                                                    </Button>
+                                                    <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="抖音：泡菜学不会（上游作者）" Tag="https://v.douyin.com/QiMp0Hpcx9w/" Click="SocialMediaButton_Click">
+                                                        <svg:SvgViewbox Source="images/douyin.svg" Width="24" Height="24"/>
+                                                    </Button>
+                                                    <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="GitHub：上游项目源仓库" Tag="https://github.com/Smart-Paocai/VioletToolBox" Click="SocialMediaButton_Click">
+                                                        <svg:SvgViewbox Source="images/GitHub.svg" Width="24" Height="24"/>
+                                                    </Button>
+                                                    <Button Style="{StaticResource AboutSocialButtonStyle}" ToolTip="Telegram：上游项目频道" Tag="https://t.me/violettoolbox" Click="SocialMediaButton_Click">
+                                                        <svg:SvgViewbox Source="images/telegram.svg" Width="24" Height="24"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <TextBlock Text="鸣谢上游代码贡献者" Style="{StaticResource AboutSectionTitleStyle}"/>
+                                    <Border Style="{StaticResource AboutCardStyle}" Margin="0,0,0,14">
+                                        <UniformGrid Columns="4">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/neko.png"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="KuroNeko" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_xiri.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="昔日" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_haohao.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="皓皓的小月" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_renji.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="仁济" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_wangting.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="王听" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_yuebing.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="月饼" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Ellipse Width="42" Height="42" VerticalAlignment="Center">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="pack://application:,,,/images/about_zhyi.jpg" Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <TextBlock Text="zhyi" Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF1F2328" VerticalAlignment="Center"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,6">
+                                                <Border Width="42" Height="42" CornerRadius="21" Background="#FFF6F8FA" BorderBrush="#FFD0D7DE" BorderThickness="1">
+                                                    <TextBlock Text="?" FontSize="18" FontWeight="Bold" Foreground="#FF656D76" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="虚位以待..." Margin="12,0,0,0" FontSize="15" FontWeight="SemiBold" Foreground="#FF656D76" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </UniformGrid>
                                     </Border>
 
                                     <!-- 技术栈与开源 -->
@@ -8603,7 +8954,7 @@
                                                 Style="{StaticResource AppPrimaryActionButtonStyle}"
                                                 Click="ReadAppListButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/搜索.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/search.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="读取应用列表" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -8611,7 +8962,7 @@
                                                 Style="{StaticResource AppActionButtonStyle}"
                                                 Click="ViewDisabledAppsButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/查看.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/view.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="查看冻结应用" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -8621,7 +8972,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="FreezeSelectedAppsButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/雪花.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <svg:SvgViewbox Source="images/freeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="冻结" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8630,7 +8981,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="UnfreezeSelectedAppsButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/解冻.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <svg:SvgViewbox Source="images/unfreeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="解冻" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8650,7 +9001,7 @@
                                                     Click="FreezeMiuiUpdaterButton_Click"
                                                     ToolTip="目前仅支持小米">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/雪花.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <svg:SvgViewbox Source="images/freeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="冻结更新" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8659,7 +9010,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="UnfreezeMiuiUpdaterButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/解冻.svg" Width="13" Height="16" Margin="0,0,6,0"/>
+                                                    <svg:SvgViewbox Source="images/unfreeze.svg" Width="13" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="恢复更新" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8672,7 +9023,7 @@
                                                 Style="{StaticResource AppDangerActionButtonStyle}"
                                                 Click="UninstallSelectedAppsButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/卸载.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/uninstall.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="卸载选中应用" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -8765,7 +9116,7 @@
                                     <Button x:Name="SelectSuperScatterButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectSuperScatterButton_Click" Background="#FFA7D3F6" BorderBrush="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -8881,7 +9232,7 @@
                                     <Button x:Name="SelectImageDirButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectImageDirButton_Click" BorderBrush="#FFA7D3F6" Background="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -8994,7 +9345,7 @@
                                     <Button x:Name="SelectUnpackedFolderButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectUnpackedFolderButton_Click" BorderBrush="#FFA7D3F6" Background="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -9470,7 +9821,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/修复Super.svg"
+                                                <svg:SvgViewbox Source="images/repair-super.svg"
                                                                 Width="16"
                                                                 Height="16"
                                                                 Margin="0,0,6,0"/>
@@ -9833,7 +10184,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -9856,7 +10207,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -9905,7 +10256,7 @@
                                                 <StackPanel Orientation="Horizontal"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/盾牌.svg"
+                                                    <svg:SvgViewbox Source="images/shield.svg"
                                                                     Width="16"
                                                                     Height="16"
                                                                     Margin="0,0,6,0"/>
@@ -10038,7 +10389,7 @@
                                                 BorderBrush="#FFE6E6E6"
                                                 Background="SkyBlue" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="370,0,0,0" Height="74">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/文件夹.svg" Width="22" Height="22" Margin="0,0,6,0"/>
+                                                <svg:SvgViewbox Source="images/folder.svg" Width="22" Height="22" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" Foreground="White" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -10155,7 +10506,7 @@
                                                 <StackPanel Orientation="Horizontal"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/盾牌.svg"
+                                                    <svg:SvgViewbox Source="images/shield.svg"
                                                                     Width="16"
                                                                     Height="16"
                                                                     Margin="0,0,6,0"/>
@@ -10225,7 +10576,7 @@
                                     <StackPanel.RenderTransform>
                                         <ScaleTransform ScaleX="1" ScaleY="1"/>
                                     </StackPanel.RenderTransform>
-                                    <svg:SvgViewbox Source="images/电源.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                    <svg:SvgViewbox Source="images/power.svg" Width="16" Height="16" Margin="0,0,5,0"/>
                                     <TextBlock Text="停止操作"
                                                VerticalAlignment="Center"
                                                Foreground="White"
@@ -10238,10 +10589,10 @@
                     </Grid>
                 </Grid>
                 <Border
-				Height="30"
+				Height="44"
 				VerticalAlignment="Top"
 				Background="#FFF8ECFF"
-				CornerRadius="0,0,20,20" Margin="0,588,0,0" Grid.Row="1" Grid.ColumnSpan="2">
+				CornerRadius="0,0,20,20" Margin="0,574,0,0" Grid.Row="1" Grid.ColumnSpan="2">
                     <Grid Cursor="">
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Left"
@@ -10249,13 +10600,26 @@
                                     Margin="10,0,0,0">
                             <Button
                                 Name="JoinQQGroupButton"
-                                Content="V1.0.0-JH"
+                                ToolTip="本分支版本 测试版 V1.2（OS1.0.2.0.UMNMIXM），代码基线为上游 V3.7-260814-R56。点击加入上游项目 QQ 交流群"
                                 Background="#FFF7B0F7"
                                 BorderThickness="0"
                                 Foreground="White"
                                 FontSize="12"
-                                Padding="8,4"
-                                VerticalAlignment="Center">
+                                Cursor="Hand"
+                                Padding="8,3"
+                                VerticalAlignment="Center"
+                                Click="JoinQQGroupButton_Click">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                    <TextBlock Text="测试版 V1.2"
+                                               FontSize="12"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="OS1.0.2.0.UMNMIXM"
+                                               FontSize="9"
+                                               Foreground="#F0FFFFFF"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Template">
