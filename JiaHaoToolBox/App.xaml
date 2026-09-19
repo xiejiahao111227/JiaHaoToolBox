@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- 预转换好的矢量图标资源，必须在其它字典之前可用：窗口里的图标全部走 StaticResource -->
+                <ResourceDictionary Source="Icons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>

@@ -1,4 +1,4 @@
-<Window
+﻿<Window
 	x:Class="WpfApp1.MainWindow" 
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
@@ -421,7 +421,7 @@
                             Cursor="Hand"
                             Click="CloseButton_Click" Margin="201,2,10,2" Grid.Column="1">
                             <Button.Content>
-                                <svg:SvgViewbox Source="images/win-close.svg" Width="12" Height="12" />
+                                <Image Source="{StaticResource ic_win_close}" Width="12" Height="12" />
                             </Button.Content>
                             <Button.Style>
                                 <Style
@@ -463,7 +463,7 @@
                             Cursor="Hand"
                             Click="MinimizeButton_Click" Margin="177,2,34,2" Grid.Column="1">
                             <Button.Content>
-                                <svg:SvgViewbox Source="images/win-minimize.svg" Width="14" Height="15" />
+                                <Image Source="{StaticResource ic_win_minimize}" Width="14" Height="15" />
                             </Button.Content>
                             <Button.Style>
                                 <Style
@@ -523,7 +523,7 @@
                                     Header="主页"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/home.svg" Width="16" Height="16"/>
+                                        <Image Source="{StaticResource ic_home}" Width="16" Height="16"/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
                                 <hc:SideMenuItem
@@ -531,7 +531,7 @@
                                     Header="投屏"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/screen-mirror.svg" Width="16" Height="16"/>
+                                        <Image Source="{StaticResource ic_screen_mirror}" Width="16" Height="16"/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
 
@@ -547,7 +547,7 @@
                                         Header="基本刷入"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/lightning.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_lightning}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -555,7 +555,7 @@
                                         Header="可视刷写"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/adb.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_adb}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -563,7 +563,7 @@
                                         Header="欧加线刷"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/wrench.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_wrench}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -571,7 +571,7 @@
                                         Header="EDL刷写"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/snapdragon.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_snapdragon}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -579,7 +579,7 @@
                                         Header="降级助手"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="pack://application:,,,/images/coloros.svg" Width="16" Height="16" />
+                                            <Image Source="{StaticResource ic_coloros}" Width="16" Height="16" />
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                 </hc:SideMenuItem>
@@ -596,7 +596,7 @@
                                         Header="模块专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/puzzle.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_puzzle}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -604,7 +604,7 @@
                                         Header="断点续传"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/download.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_download}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -612,7 +612,7 @@
                                         Header="文件传输"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/file-transfer.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_file_transfer}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -620,7 +620,7 @@
                                         Header="脱机修补"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/Auto.svg" Width="17" Height="18" RenderTransformOrigin="0.625,0.5"/>
+                                            <Image Source="{StaticResource ic_Auto}" Width="17" Height="18" RenderTransformOrigin="0.625,0.5"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -628,7 +628,7 @@
                                         Header="应用管理"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/app.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_app}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -636,7 +636,7 @@
                                         Header="安卓通用"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/android.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_android}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -644,7 +644,7 @@
                                         Header="Payload"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/image-file.svg" Width="15" Height="18"/>
+                                            <Image Source="{StaticResource ic_image_file}" Width="15" Height="18"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -652,7 +652,7 @@
                                         Header="备份助手"
                                         Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/backup.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_backup}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                 </hc:SideMenuItem>
@@ -669,7 +669,7 @@
                                         Header="下载专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/download.svg" Width="16" Height="16"/>
+                                            <Image Source="{StaticResource ic_download}" Width="16" Height="16"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                     <hc:SideMenuItem
@@ -677,7 +677,7 @@
                                         Header="Rom专区"
                                         Cursor="Hand" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                         <hc:SideMenuItem.Icon>
-                                            <svg:SvgViewbox Source="images/cloud-download.svg" Width="15" Height="17"/>
+                                            <Image Source="{StaticResource ic_cloud_download}" Width="15" Height="17"/>
                                         </hc:SideMenuItem.Icon>
                                     </hc:SideMenuItem>
                                 </hc:SideMenuItem>
@@ -688,7 +688,7 @@
                                     Header="关于"
                                     Cursor="Hand" FontSize="13" PreviewMouseLeftButtonUp="DirectItem_PreviewMouseLeftButtonUp">
                                     <hc:SideMenuItem.Icon>
-                                        <svg:SvgViewbox Source="images/about.svg" Width="16" Height="16" Cursor=""/>
+                                        <Image Source="{StaticResource ic_about}" Width="16" Height="16" Cursor=""/>
                                     </hc:SideMenuItem.Icon>
                                 </hc:SideMenuItem>
                             </hc:SideMenu>
@@ -992,31 +992,31 @@
                                                 <UniformGrid Columns="2" Margin="0,10,0,0">
                                                     <Button x:Name="RebootPhoneButton" Click="RebootPhoneButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/reboot.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_reboot}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="系统" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToFastbootButton" Click="RebootToFastbootButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/lightning-2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_lightning_2}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="Fastboot" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToFastbootDButton" Click="RebootToFastbootDButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/arrow-down.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_arrow_down}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="FastbootD" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootToRecoveryButton" Click="RebootToRecoveryButton_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/repair.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_repair}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="Recovery" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
                                                     <Button x:Name="RebootTo9008Button" Click="RebootTo9008Button_Click" Style="{StaticResource HomeActionButtonStyle}" Margin="0,0,8,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/chip-data.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_chip_data}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="9008(EDL)" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1025,7 +1025,7 @@
                                                             Style="{StaticResource HomeActionButtonStyle}"
                                                             Margin="8,0,0,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_refresh}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="刷新设备" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1053,7 +1053,7 @@
                                                             Style="{StaticResource HomeToolButtonStyle}"
                                                             Margin="0,0,8,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/WIFI.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_WIFI}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="无线调试" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1062,7 +1062,7 @@
                                                             Style="{StaticResource HomeToolButtonStyle}"
                                                             Margin="8,0,0,10">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/switch-slot.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_switch_slot}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="切换槽位" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1518,7 +1518,7 @@
                                                             IsEnabled="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton}"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1549,7 +1549,7 @@
                                                             IsEnabled="{Binding IsChecked, ElementName=OfflinePatchModeRadioButton}"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1579,7 +1579,7 @@
                                                                 Style="{StaticResource AutorootPrimaryButtonStyle}"
                                                                 Background="#FFC99AE4">
                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                                <svg:SvgViewbox Source="images/start-1.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_start_1}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="开始" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1754,7 +1754,7 @@
                                                             Click="GkiSelectBootButton_Click"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1780,7 +1780,7 @@
                                                             Click="SelectAnykernel3Button_Click"
                                                             Style="{StaticResource AutorootSelectButtonStyle}" Height="36">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -1901,7 +1901,7 @@
                                                                 Click="AvbSelectBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1929,7 +1929,7 @@
                                                                 Click="AvbSelectInitBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1955,7 +1955,7 @@
                                                                 Click="AvbSelectVbmetaButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -1983,7 +1983,7 @@
                                                                 Click="AvbSelectAospVbmetaButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2009,7 +2009,7 @@
                                                                 Click="AvbSelectAospBootButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2035,7 +2035,7 @@
                                                                 Click="AvbSelectAospRecoveryButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2061,7 +2061,7 @@
                                                                 Click="AvbSelectAospVbmetaSystemButton_Click"
                                                                 Style="{StaticResource AutorootSelectButtonStyle}" Height="34">
                                                             <StackPanel Orientation="Horizontal">
-                                                                <svg:SvgViewbox Source="images/folder.svg" Width="15" Height="15" Margin="0,0,5,0"/>
+                                                                <Image Source="{StaticResource ic_folder}" Width="15" Height="15" Margin="0,0,5,0"/>
                                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                             </StackPanel>
                                                         </Button>
@@ -2175,7 +2175,7 @@
                                                                 Click="ForcePortraitButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/landscape-to-portrait.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <Image Source="{StaticResource ic_landscape_to_portrait}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="强制竖屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2219,7 +2219,7 @@
                                                                 Click="ForceLandscapeButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/portrait-to-landscape.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <Image Source="{StaticResource ic_portrait_to_landscape}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="强制横屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2263,7 +2263,7 @@
                                                                 Click="AutoRotateButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/auto-rotate.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <Image Source="{StaticResource ic_auto_rotate}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="自动旋转" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2307,7 +2307,7 @@
                                                                 Click="ScreenshotButton_Click">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                            <svg:SvgViewbox Source="images/ic-screenshot.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                                            <Image Source="{StaticResource ic_ic_screenshot}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                                             <TextBlock Text="截屏" VerticalAlignment="Center"/>
                                                                         </StackPanel>
                                                                     </Button.Content>
@@ -2423,7 +2423,7 @@
                                                                 ToolTip="返回键"
                                                                 Click="BackKeyButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/nav-back.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/nav-back.svg"/>
                                                                         <TextBlock Text="返回键" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2465,7 +2465,7 @@
                                                                                                 Margin="0,0,8,0"
                                                                                                 Click="HomeKeyButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/circle.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/circle.svg"/>
                                                                         <TextBlock Text="主页键" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2516,7 +2516,7 @@
                                                         ToolTip="多任务"
                                                         Click="RecentAppsButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/icon-recents.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/icon-recents.svg"/>
                                                                         <TextBlock Text="多任务" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2567,7 +2567,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="LockScreenButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
                                                                         <TextBlock Text="锁屏" VerticalAlignment="Center"/>
                                                                     </StackPanel>
 
@@ -2608,7 +2608,7 @@
                                                                         ToolTip="向设备发送电源键（keyevent 26）"
                                                                         Click="PowerKeyButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/power.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/power.svg"/>
                                                                         <TextBlock Text="电源键" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                 </Button>
@@ -2617,7 +2617,7 @@
                                                                         ToolTip="仅息屏不锁屏（keyevent 223）"
                                                                         Click="ScreenOffButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/lock-screen.svg"/>
                                                                         <TextBlock Text="息屏" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                 </Button>
@@ -2627,7 +2627,7 @@
                                                                         ToolTip="点亮屏幕（keyevent 224）"
                                                                         Click="ScreenOnButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/lightning.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/lightning.svg"/>
                                                                         <TextBlock Text="亮屏" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                 </Button>
@@ -2687,7 +2687,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeUpButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
                                                                         <TextBlock Text="音量+" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2725,7 +2725,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeDownButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/volume.svg"/>
                                                                         <TextBlock Text="音量-" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2763,7 +2763,7 @@
                                                                 Margin="0,0,8,0"
                                                                 Click="VolumeMuteButton_Click">
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                                        <svg:SvgViewbox Width="16" Height="16" Margin="0,0,6,0" Source="/images/mute.svg"/>
+                                                                        <Image Width="16" Height="16" Margin="0,0,6,0" Source="/images/mute.svg"/>
                                                                         <TextBlock Text="静音" VerticalAlignment="Center"/>
                                                                     </StackPanel>
                                                                     <FrameworkElement.Style>
@@ -2959,7 +2959,7 @@
                                                 Click="StartMirrorButton_Click" BorderBrush="#FFF8F9FA">
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/start-1.svg" Width="18" Height="18" Margin="0,0,6,0"/>
+                                                            <Image Source="{StaticResource ic_start_1}" Width="18" Height="18" Margin="0,0,6,0"/>
                                                             <TextBlock Text="开始投屏" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button.Content>
@@ -2995,7 +2995,7 @@
                                                 Click="StopMirrorButton_Click" Margin="10,0,0,0">
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/pause.svg" Width="18" Height="18" Margin="0,0,6,0"/>
+                                                            <Image Source="{StaticResource ic_pause}" Width="18" Height="18" Margin="0,0,6,0"/>
                                                             <TextBlock Text="结束投屏" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                     </Button.Content>
@@ -3415,7 +3415,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -3448,7 +3448,7 @@
                                                     Click="FlashBootButton_Click"
                                                     Style="{StaticResource BasicFlashAccentButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/lightning-2.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_lightning_2}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="开始刷入" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3473,7 +3473,7 @@
                                                 ToolTip="前两个为解锁指令 后两个为回锁指令"
                                                 Style="{StaticResource BasicFlashAccentButtonStyle}">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <Image Source="{StaticResource ic_refresh}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="执行指令" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -3518,7 +3518,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -3556,7 +3556,7 @@
                                                     Click="StartXiaomiFlashButton_Click"
                                                     Style="{StaticResource BasicFlashAccentButtonStyle}" Margin="27,39,-1,0">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/data-cable.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_data_cable}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="开始线刷" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3570,43 +3570,43 @@
                                             <UniformGrid Margin="0,12,0,0" Columns="2">
                                                 <Button x:Name="FormatDeviceButton" Margin="0,0,8,8" Click="FormatDeviceButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="恢复出厂设置">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/format-sdcard.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_format_sdcard}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="格式化设备【双清】" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="EraseGoogleLockButton" Margin="0,0,0,8" Click="EraseGoogleLockButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="解决安卓15无法安装应用">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/google.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_google}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="擦除谷歌锁" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="FixAdbButton" Margin="0,0,8,8" Click="FixAdbButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="【需ROOT】解决投屏报错adb push">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/adb.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_adb}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="修复ADB异常" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="EnableMiuiUsbButton" Margin="0,0,0,8" Click="EnableMiuiUsbButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="需ROOT">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/icon-xiaomi.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_icon_xiaomi}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="强开小米USB安全设置" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="ReadOnePlusDdrButton" Margin="0,0,8,8" Click="ReadOnePlusDdrButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/flash-mem.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_flash_mem}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="ADB读一加DDR版本" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="EnableDiagPortButton" Margin="0,0,0,8" Click="EnableDiagPortButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}" ToolTip="需ROOT">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/baseband.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_baseband}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock VerticalAlignment="Center"><Run Language="zh-cn" Text="ADB"/><Run Text="强开基带调试端口"/></TextBlock>
                                                     </StackPanel>
                                                 </Button>
                                                 <Button x:Name="SwitchToMtpButton" Margin="0,0,8,0" Click="SwitchToMtpButton_Click" Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/file-transfer.svg" Width="14" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_file_transfer}" Width="14" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock Text="ADB切换文件传输" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Button>
@@ -3616,7 +3616,7 @@
                                                     ToolTip="用于分析OCDT中的项目号是否为空"
                                                     Style="{StaticResource BasicFlashLightButtonStyle}">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/image-file.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                        <Image Source="{StaticResource ic_image_file}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                         <TextBlock VerticalAlignment="Center"><Run Text="欧加真"/><Run Text="OCDT"/><Run Language="zh-cn" Text="分析"/></TextBlock>
                                                     </StackPanel>
                                                 </Button>
@@ -3891,7 +3891,7 @@
                                                 Style="{StaticResource FastbootPrimaryButtonStyle}"
                                                 Width="84" BorderBrush="#FFE6E6E6" Background="skyblue">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -4072,14 +4072,14 @@
                                                                         </Style>
                                                                     </CheckBox.Style>
                                                                 </CheckBox>
-                                                                <svg:SvgViewbox Source="images/shield.svg"
+                                                                <Image Source="{StaticResource ic_shield}"
                                                                                 Width="16"
                                                                                 Height="16"
                                                                                 HorizontalAlignment="Center"
                                                                                 VerticalAlignment="Center"
                                                                                 ToolTip="该分区已受保护，当前禁止写入">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="{x:Type svg:SvgViewbox}">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="{x:Type Image}">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
                                                                             <Style.Triggers>
                                                                                 <MultiDataTrigger>
@@ -4099,8 +4099,8 @@
                                                                                 </MultiDataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
+                                                                    </Image.Style>
+                                                                </Image>
                                                             </Grid>
                                                         </DataTemplate>
                                                     </DataGridTemplateColumn.CellTemplate>
@@ -4483,7 +4483,7 @@
                             <Button x:Name="SelectHiddenRootZipButton" HorizontalAlignment="Left" Margin="375,13,0,0" VerticalAlignment="Top" Width="84" Click="SelectHiddenRootZipButton_Click" Style="{StaticResource FastbootPrimaryButtonStyle}" BorderBrush="#FFE6E6E6" Background="SkyBlue">
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                        <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                         <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                     </StackPanel>
                                 </Button.Content>
@@ -4598,7 +4598,7 @@
                                     <Button x:Name="InstallDetectAppsButton" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Width="118" Click="InstallDetectAppsButton_Click" HorizontalAlignment="Left" Margin="65,0,0,0" Style="{StaticResource FastbootSecondaryButtonStyle}">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/APK.svg" Width="14" Height="14" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_APK}" Width="14" Height="14" Margin="0,0,6,0"/>
                                                 <TextBlock Text="开始安装" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -4648,7 +4648,7 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="0">
-                                                        <svg:SvgViewbox Source="images/archive.svg" Width="20" Height="20" Margin="0,0,8,0"/>
+                                                        <Image Source="{StaticResource ic_archive}" Width="20" Height="20" Margin="0,0,8,0"/>
                                                         <TextBlock Text="{Binding FileName}" VerticalAlignment="Center" FontFamily="Microsoft YaHei UI" FontSize="12" Foreground="#FF334155"/>
                                                     </StackPanel>
                                                     <CheckBox Grid.Column="1"
@@ -4665,7 +4665,7 @@
                                     <TextBlock HorizontalAlignment="Left" Margin="0,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" FontSize="12" Foreground="#FF64748B" RenderTransformOrigin="0.497,0.824" Width="231"><Run Text="支持自动过滤模块文件，"/><Run Language="zh-cn" Text="排除无关多余"/><Run Text="文件"/></TextBlock>
                                     <Button HorizontalAlignment="Left" Margin="281,291,0,0" VerticalAlignment="Top" Width="84" BorderBrush="#FFE6E6E6" Background="SkyBlue" Click="SelectModuleButton_Click" Style="{StaticResource FastbootPrimaryButtonStyle}" ToolTip="手动选择模块文件">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                         </StackPanel>
                                     </Button>
@@ -5085,7 +5085,7 @@
                                                             Height="36"
                                                             Style="{StaticResource VioletActionButtonStyle}">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5160,7 +5160,7 @@
                                                             Style="{StaticResource VioletActionButtonStyle}"
                                                             Margin="0,0,8,0">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/arrow-down.svg" Width="14" Height="14" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_arrow_down}" Width="14" Height="14" Margin="0,0,5,0"/>
                                                             <TextBlock Text="开始下载" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5170,9 +5170,9 @@
                                                             Margin="4,0,4,0" Foreground="White" BorderBrush="#FFFFA7A7" Background="#FFFFA7A7">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                             <Grid Width="14" Height="14" Margin="0,0,5,0">
-                                                                <svg:SvgViewbox Source="images/pause.svg" Width="14" Height="14">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="svg:SvgViewbox">
+                                                                <Image Source="{StaticResource ic_pause}" Width="14" Height="14">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                             <Style.Triggers>
                                                                                 <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
@@ -5180,11 +5180,11 @@
                                                                                 </DataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
-                                                                <svg:SvgViewbox Source="images/pause-dark.svg" Width="14" Height="14">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="svg:SvgViewbox">
+                                                                    </Image.Style>
+                                                                </Image>
+                                                                <Image Source="{StaticResource ic_pause_dark}" Width="14" Height="14">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
                                                                             <Style.Triggers>
                                                                                 <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
@@ -5192,8 +5192,8 @@
                                                                                 </DataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
+                                                                    </Image.Style>
+                                                                </Image>
                                                             </Grid>
                                                             <TextBlock Text="暂停" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                                                         </StackPanel>
@@ -5204,9 +5204,9 @@
                                                             Margin="8,0,0,0" Foreground="White" Background="#FFFFD398" BorderBrush="#FFFFD398">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                             <Grid Width="14" Height="14" Margin="0,0,5,0">
-                                                                <svg:SvgViewbox Source="images/start-1.svg" Width="14" Height="14">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="svg:SvgViewbox">
+                                                                <Image Source="{StaticResource ic_start_1}" Width="14" Height="14">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
                                                                             <Setter Property="Visibility" Value="Visible"/>
                                                                             <Style.Triggers>
                                                                                 <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
@@ -5214,11 +5214,11 @@
                                                                                 </DataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
-                                                                <svg:SvgViewbox Source="images/start-1-dark.svg" Width="14" Height="14">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="svg:SvgViewbox">
+                                                                    </Image.Style>
+                                                                </Image>
+                                                                <Image Source="{StaticResource ic_start_1_dark}" Width="14" Height="14">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
                                                                             <Style.Triggers>
                                                                                 <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
@@ -5226,8 +5226,8 @@
                                                                                 </DataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
+                                                                    </Image.Style>
+                                                                </Image>
                                                             </Grid>
                                                             <TextBlock Text="继续" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                                                         </StackPanel>
@@ -5258,7 +5258,7 @@
                                                             Style="{StaticResource VioletAccentButtonStyle}"
                                                             Height="44">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/start-1.svg" Width="14" Height="14" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_start_1}" Width="14" Height="14" Margin="0,0,5,0"/>
                                                             <TextBlock Text="使用新链接继续" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -5379,7 +5379,7 @@
                                             <Button VerticalAlignment="Top" Width="105" Click="LoadSystemZoneLocationButton_Click" Height="36" Background="#FFD39AF3" Foreground="White">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/loading.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_loading}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="加载目录"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5387,7 +5387,7 @@
                                             <Button VerticalAlignment="Top" Width="130" Height="36" Background="#FFD39AF3" Foreground="White" Margin="10,0,0,0" Click="Button_Click_1" Tag="传入文件到手机">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/arrow-down.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_arrow_down}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock><Run Text="传入文件到"/><Run Language="zh-cn" Text="设备"/></TextBlock>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5395,7 +5395,7 @@
                                             <Button VerticalAlignment="Top" Width="130" Height="36" Background="#FFD39AF3" Foreground="White" Margin="10,0,0,0" Click="Button_Click_2">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/arrow-up.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_arrow_up}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="传出文件到电脑" Width="86"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5403,7 +5403,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FF9A9AF3" Foreground="White" Margin="10,0,0,0" Click="RefreshButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/refresh.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_refresh}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="刷新目录"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5411,7 +5411,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FF9A9AF3" Foreground="White" Margin="10,0,0,0" Click="BackButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/arrow-left.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_arrow_left}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="返回上级"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5419,7 +5419,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FF9A9AF3" Foreground="White" Margin="10,0,0,0" Click="InstallApkButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/APK.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_APK}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="安装APK"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5427,7 +5427,7 @@
                                             <Button VerticalAlignment="Top" Width="94" Height="36" Background="#FFFD8383" Foreground="White" Margin="10,0,0,0" Click="DeleteSelectedFilesButton_Click">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <svg:SvgViewbox Source="images/uninstall.svg" Width="16" Height="16" Margin="0,0,6,0" />
+                                                        <Image Source="{StaticResource ic_uninstall}" Width="16" Height="16" Margin="0,0,6,0" />
                                                         <TextBlock Text="删除"/>
                                                     </StackPanel>
                                                 </Button.Content>
@@ -5545,9 +5545,9 @@
                                                                             </Path.Style>
                                                                         </Path>
                                                                         <!-- 压缩包图标（.7z .zip .rar .tgz） -->
-                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/archive.svg">
-                                                                            <svg:SvgViewbox.Style>
-                                                                                <Style TargetType="svg:SvgViewbox">
+                                                                        <Image Width="1000" Height="1000" Source="{StaticResource ic_archive}">
+                                                                            <Image.Style>
+                                                                                <Style TargetType="Image">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
                                                                                         <DataTrigger Binding="{Binding IsArchive}" Value="True">
@@ -5555,12 +5555,12 @@
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
                                                                                 </Style>
-                                                                            </svg:SvgViewbox.Style>
-                                                                        </svg:SvgViewbox>
+                                                                            </Image.Style>
+                                                                        </Image>
                                                                         <!-- 镜像文件图标（.img） -->
-                                                                        <svg:SvgViewbox Width="1000" Height="1000" Source="images/image-file.svg">
-                                                                            <svg:SvgViewbox.Style>
-                                                                                <Style TargetType="svg:SvgViewbox">
+                                                                        <Image Width="1000" Height="1000" Source="{StaticResource ic_image_file}">
+                                                                            <Image.Style>
+                                                                                <Style TargetType="Image">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
                                                                                         <DataTrigger Binding="{Binding IsImageFile}" Value="True">
@@ -5568,8 +5568,8 @@
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
                                                                                 </Style>
-                                                                            </svg:SvgViewbox.Style>
-                                                                        </svg:SvgViewbox>
+                                                                            </Image.Style>
+                                                                        </Image>
                                                                     </Canvas>
                                                                 </Viewbox>
                                                                 <Image Source="{Binding PreviewImage}"
@@ -5588,9 +5588,9 @@
                                                                         </Style>
                                                                     </Image.Style>
                                                                 </Image>
-                                                                <svg:SvgViewbox Source="images/check.svg" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="10">
-                                                                    <svg:SvgViewbox.Style>
-                                                                        <Style TargetType="svg:SvgViewbox">
+                                                                <Image Source="{StaticResource ic_check}" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="10">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
                                                                             <Style.Triggers>
                                                                                 <MultiDataTrigger>
@@ -5602,8 +5602,8 @@
                                                                                 </MultiDataTrigger>
                                                                             </Style.Triggers>
                                                                         </Style>
-                                                                    </svg:SvgViewbox.Style>
-                                                                </svg:SvgViewbox>
+                                                                    </Image.Style>
+                                                                </Image>
                                                             </Grid>
                                                             <TextBlock Text="{Binding Name}"
                                                                        ToolTip="{Binding Name}"
@@ -5779,8 +5779,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -5791,8 +5791,8 @@
                                                             Height="20"
                                                             FontSize="14"
                                                             FontFamily="Segoe UI Black"/>
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"
@@ -5816,8 +5816,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top" Cursor="">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -5828,8 +5828,8 @@
                                                             Height="20"
                                                             FontSize="14"
                                                             FontFamily="Segoe UI Black"/>
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"
@@ -5853,8 +5853,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -5892,8 +5892,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -5931,8 +5931,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -5954,8 +5954,8 @@
                                                         Orientation="Vertical"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Top">
-                                                            <svg:SvgViewbox
-                                                            Source="images/files.svg"
+                                                            <Image
+                                                            Source="{StaticResource ic_files}"
                                                             Width="90"
                                                             Height="79"
                                                             Opacity="0.9"/>
@@ -6102,7 +6102,7 @@
                                     <Button HorizontalAlignment="Left" Margin="740,0,0,0" VerticalAlignment="Top" Width="108" Height="35" Background="#FFC99AE4" BorderBrush="#FFC99AE4" Foreground="White" FontSize="14" Click="BackToDriverTileButton_Click">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/back.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_back}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="返回主页" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -6157,7 +6157,7 @@
                                     <Button Height="30" Name="BrowseInputButton" Click="BrowseInputButton_Click" Grid.Column="1" Grid.ColumnSpan="2" Width="87" HorizontalAlignment="Left" Margin="351,0,0,0" Background="SkyBlue" Foreground="White" BorderBrush="#FFCFD1D1">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="14" Height="14" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="14" Height="14" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -6170,7 +6170,7 @@
                                     <Button Grid.Row="1" Grid.Column="1" Height="30" Margin="351,10,0,0" Name="BrowseOutputButton" Click="BrowseOutputButton_Click" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="87" HorizontalAlignment="Left" BorderBrush="#FFCFD1D1" Background="SkyBlue" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="14" Height="14" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="14" Height="14" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -7130,7 +7130,7 @@
                                                     Background="SkyBlue"
                                                     Click="EdlLoaderBrowseButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -7149,7 +7149,7 @@
                                                     Background="SkyBlue"
                                                     Click="EdlFlashPackBrowseButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                    <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                     <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                             </Button>
@@ -7426,15 +7426,15 @@
                                                                                 </Style>
                                                                             </CheckBox.Style>
                                                                         </CheckBox>
-                                                                        <svg:SvgViewbox
-                                                                        Source="images/shield.svg"
+                                                                        <Image
+                                                                        Source="{StaticResource ic_shield}"
                                                                         Width="16"
                                                                         Height="16"
                                                                         HorizontalAlignment="Center"
                                                                         VerticalAlignment="Center"
                                                                         ToolTip="该分区已受基带指纹保护，当前禁止写入">
-                                                                            <svg:SvgViewbox.Style>
-                                                                                <Style TargetType="{x:Type svg:SvgViewbox}">
+                                                                            <Image.Style>
+                                                                                <Style TargetType="{x:Type Image}">
                                                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                                                     <Style.Triggers>
                                                                                         <MultiDataTrigger>
@@ -7446,8 +7446,8 @@
                                                                                         </MultiDataTrigger>
                                                                                     </Style.Triggers>
                                                                                 </Style>
-                                                                            </svg:SvgViewbox.Style>
-                                                                        </svg:SvgViewbox>
+                                                                            </Image.Style>
+                                                                        </Image>
                                                                     </Grid>
                                                                 </DataTemplate>
                                                             </DataGridTemplateColumn.CellTemplate>
@@ -7977,7 +7977,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -8012,7 +8012,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                            <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                             <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                                         </StackPanel>
                                                     </Button>
@@ -8047,7 +8047,7 @@
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center"
                                                                     VerticalAlignment="Center">
-                                                            <svg:SvgViewbox Source="images/folder.svg"
+                                                            <Image Source="{StaticResource ic_folder}"
                                                                             Width="16"
                                                                             Height="16"
                                                                             Margin="0,0,5,0"/>
@@ -8505,19 +8505,19 @@
 
                                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                     <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="哔哩哔哩：泡菜学不会（上游作者）" Tag="https://b23.tv/wk4Qp7a" Click="SocialMediaButton_Click">
-                                                        <svg:SvgViewbox Source="images/bilibili.svg" Width="24" Height="24"/>
+                                                        <Image Source="{StaticResource ic_bilibili}" Width="24" Height="24"/>
                                                     </Button>
                                                     <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="酷安：泡菜学不会（上游作者）" Tag="http://www.coolapk.com/u/33872028" Click="SocialMediaButton_Click">
-                                                        <svg:SvgViewbox Source="images/coolapk.svg" Width="24" Height="24"/>
+                                                        <Image Source="{StaticResource ic_coolapk}" Width="24" Height="24"/>
                                                     </Button>
                                                     <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="抖音：泡菜学不会（上游作者）" Tag="https://v.douyin.com/QiMp0Hpcx9w/" Click="SocialMediaButton_Click">
-                                                        <svg:SvgViewbox Source="images/douyin.svg" Width="24" Height="24"/>
+                                                        <Image Source="{StaticResource ic_douyin}" Width="24" Height="24"/>
                                                     </Button>
                                                     <Button Style="{StaticResource AboutSocialButtonStyle}" Margin="0,0,6,0" ToolTip="GitHub：上游项目源仓库" Tag="https://github.com/Smart-Paocai/VioletToolBox" Click="SocialMediaButton_Click">
-                                                        <svg:SvgViewbox Source="images/GitHub.svg" Width="24" Height="24"/>
+                                                        <Image Source="{StaticResource ic_GitHub}" Width="24" Height="24"/>
                                                     </Button>
                                                     <Button Style="{StaticResource AboutSocialButtonStyle}" ToolTip="Telegram：上游项目频道" Tag="https://t.me/violettoolbox" Click="SocialMediaButton_Click">
-                                                        <svg:SvgViewbox Source="images/telegram.svg" Width="24" Height="24"/>
+                                                        <Image Source="{StaticResource ic_telegram}" Width="24" Height="24"/>
                                                     </Button>
                                                 </StackPanel>
                                             </StackPanel>
@@ -8954,7 +8954,7 @@
                                                 Style="{StaticResource AppPrimaryActionButtonStyle}"
                                                 Click="ReadAppListButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/search.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_search}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="读取应用列表" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -8962,7 +8962,7 @@
                                                 Style="{StaticResource AppActionButtonStyle}"
                                                 Click="ViewDisabledAppsButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/view.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_view}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="查看冻结应用" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -8972,7 +8972,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="FreezeSelectedAppsButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/freeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <Image Source="{StaticResource ic_freeze}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="冻结" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8981,7 +8981,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="UnfreezeSelectedAppsButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/unfreeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <Image Source="{StaticResource ic_unfreeze}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="解冻" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -8990,7 +8990,7 @@
                                                 Style="{StaticResource AppActionButtonStyle}"
                                                 Click="ExtractApkButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/APK.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_APK}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="提取 APK 安装包" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -9001,7 +9001,7 @@
                                                     Click="FreezeMiuiUpdaterButton_Click"
                                                     ToolTip="目前仅支持小米">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/freeze.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                    <Image Source="{StaticResource ic_freeze}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="冻结更新" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -9010,7 +9010,7 @@
                                                     Style="{StaticResource AppActionButtonStyle}"
                                                     Click="UnfreezeMiuiUpdaterButton_Click">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/unfreeze.svg" Width="13" Height="16" Margin="0,0,6,0"/>
+                                                    <Image Source="{StaticResource ic_unfreeze}" Width="13" Height="16" Margin="0,0,6,0"/>
                                                     <TextBlock Text="恢复更新" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
@@ -9023,7 +9023,7 @@
                                                 Style="{StaticResource AppDangerActionButtonStyle}"
                                                 Click="UninstallSelectedAppsButton_Click">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/uninstall.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_uninstall}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="卸载选中应用" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -9116,7 +9116,7 @@
                                     <Button x:Name="SelectSuperScatterButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectSuperScatterButton_Click" Background="#FFA7D3F6" BorderBrush="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -9232,7 +9232,7 @@
                                     <Button x:Name="SelectImageDirButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectImageDirButton_Click" BorderBrush="#FFA7D3F6" Background="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -9345,7 +9345,7 @@
                                     <Button x:Name="SelectUnpackedFolderButton" HorizontalAlignment="Left" Margin="253,-4,0,0" VerticalAlignment="Top" Width="85" Click="SelectUnpackedFolderButton_Click" BorderBrush="#FFA7D3F6" Background="#FFA7D3F6" Foreground="White">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -9821,7 +9821,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/repair-super.svg"
+                                                <Image Source="{StaticResource ic_repair_super}"
                                                                 Width="16"
                                                                 Height="16"
                                                                 Margin="0,0,6,0"/>
@@ -10184,7 +10184,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -10207,7 +10207,7 @@
                                             <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="16" Height="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="选择" VerticalAlignment="Center" Foreground="White"/>
                                             </StackPanel>
                                         </Button>
@@ -10256,7 +10256,7 @@
                                                 <StackPanel Orientation="Horizontal"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/shield.svg"
+                                                    <Image Source="{StaticResource ic_shield}"
                                                                     Width="16"
                                                                     Height="16"
                                                                     Margin="0,0,6,0"/>
@@ -10389,7 +10389,7 @@
                                                 BorderBrush="#FFE6E6E6"
                                                 Background="SkyBlue" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="370,0,0,0" Height="74">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <svg:SvgViewbox Source="images/folder.svg" Width="22" Height="22" Margin="0,0,6,0"/>
+                                                <Image Source="{StaticResource ic_folder}" Width="22" Height="22" Margin="0,0,6,0"/>
                                                 <TextBlock Text="选择" Foreground="White" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
@@ -10506,7 +10506,7 @@
                                                 <StackPanel Orientation="Horizontal"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center">
-                                                    <svg:SvgViewbox Source="images/shield.svg"
+                                                    <Image Source="{StaticResource ic_shield}"
                                                                     Width="16"
                                                                     Height="16"
                                                                     Margin="0,0,6,0"/>
@@ -10576,7 +10576,7 @@
                                     <StackPanel.RenderTransform>
                                         <ScaleTransform ScaleX="1" ScaleY="1"/>
                                     </StackPanel.RenderTransform>
-                                    <svg:SvgViewbox Source="images/power.svg" Width="16" Height="16" Margin="0,0,5,0"/>
+                                    <Image Source="{StaticResource ic_power}" Width="16" Height="16" Margin="0,0,5,0"/>
                                     <TextBlock Text="停止操作"
                                                VerticalAlignment="Center"
                                                Foreground="White"

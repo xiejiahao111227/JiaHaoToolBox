@@ -20,6 +20,7 @@
 | 版本号 | 徽章改为 `测试版 V1.2`，其下新增上游格式的机型版本串 `OS1.0.2.0.UMNMIXM`；程序集 `Version=1.2.0`、`InformationalVersion=1.2.0-TEST+OS1.0.2.0.UMNMIXM` |
 | 侧边栏导航 | `hc:SideMenu` 的 `ExpandMode` 由 `Freedom` 改为 `ShowAll` 并常驻展开（配 `NavTopItemStyle` / `NavLeafItemStyle` 收紧行高，22 行一屏显示）。上游分组折叠依赖 `SideMenuItem.IsSelected`，启动时只有一处伪造点击展开"刷写功能"，其余分组永远点不开；同时删除三段绑定到 HandyControl 3.5.1 中并不存在的 `IsExpanded` 的箭头触发器 |
 | 安装包 | 新增 WiX MSI 与 Inno Setup EXE 两套每用户安装包，见「打包」 |
+| 启动耗时 | 图标改为构建期预转换的矢量资源，并去掉启动遮罩里的人为等待，冷启动约 4.1 秒降到 1.5 秒，见「图标与启动性能」 |
 
 ## 功能范围
 
@@ -73,6 +74,22 @@ dotnet publish JiaHaoToolBox/JiaHaoToolBox.csproj -c Release -r win-x64 --self-c
 ```
 
 程序运行依赖 `platform-tools`（adb / fastboot）、`scrcpy`、`7z.exe` 等外部工具，需随发布包一并放置到输出目录，不能只分发 EXE。
+
+## 图标与启动性能
+
+上游把 121 处图标写成 `<svg:SvgViewbox Source="images/xxx.svg">`。SharpVectors 是**每个实例**各自解析一遍 SVG 再重建绘图对象，而这些实例全部在 `InitializeComponent()` 里构造，于是窗口出现之前要先花约 1.9 秒处理图标——实测冷启动 4.1 秒，其中 `InitializeComponent` 占 2.97 秒。
+
+本仓库改为构建期预转换：
+
+1. `dotnet run --project tools/IconGen/IconGen.csproj -- <工程目录>` 用 SharpVectors 把 `images/*.svg` 转成冻结的 `DrawingImage`，坐标保留 2 位小数，输出 `JiaHaoToolBox/Icons.xaml`（约 128 KB）与 `tools/icon-manifest.tsv`；内嵌 base64 位图的 SVG（`coloros` / `image-file`）单独导出 PNG 并生成 `BitmapImage` 资源。
+2. `bash tools/ps-enc.sh tools/xaml-svg-to-image.ps1 '$PSScriptRoot="<仓库绝对路径>/tools"'` 依据清单把 `MainWindow.xaml` / `Window1.xaml` 里的 `SvgViewbox` 换成 `<Image Source="{StaticResource ic_xxx}">`，并同步改写 `<Image.Style>` 与样式 `TargetType`。
+3. `App.xaml` 的 `MergedDictionaries` 首位引入 `Icons.xaml`。
+
+新增图标时把 SVG 放进 `images/`，重跑第 1 步，再按同样的 `<Image Source="{StaticResource ic_文件名}">` 写法引用。
+
+SharpVectors 依赖仍保留，因为还有两类图标必须在运行时解析：驱动列表模板里 `Source="{Binding IconSource}"` 绑定的是 SVG 路径字符串，以及 `MainWindow.xaml.cs` / `oujiaflash.cs` 中动态 `new SvgViewbox{...}` 创建的投屏控制条与文件夹按钮。
+
+另外删除了 `MainWindow_Loaded` 里 `Task.Delay(350)` + `Task.Delay(100)` 两段"等 UI 稳定"的假等待，遮罩改为在首次布局完成时即隐藏。优化后 `InitializeComponent` 约 0.64 秒，端到端可用约 1.4–1.7 秒（`tools/startup-timing.ps1 -Exe <产物路径> -MarkerFile tools/overlay-marker.txt` 可复测）。
 
 ## 打包
 

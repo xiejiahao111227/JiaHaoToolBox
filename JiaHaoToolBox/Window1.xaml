@@ -74,7 +74,7 @@
                         Cursor="Hand"
                         Click="CloseButton_Click" Margin="0,2,8,2">
                         <Button.Content>
-                            <svg:SvgViewbox Source="images/win-close.svg" Width="12" Height="12" />
+                            <Image Source="{StaticResource ic_win_close}" Width="12" Height="12" />
                         </Button.Content>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -107,7 +107,7 @@
                         Cursor="Hand"
                         Click="MinimizeButton_Click" Margin="98,2,0,2">
                         <Button.Content>
-                            <svg:SvgViewbox Source="images/win-minimize.svg" Width="14" Height="15" />
+                            <Image Source="{StaticResource ic_win_minimize}" Width="14" Height="15" />
                         </Button.Content>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">

@@ -1100,12 +1100,8 @@ namespace WpfApp1
             }
 
             // 解决 HandyControl 的异步加载延迟问题
-            Dispatcher.BeginInvoke(new Action(async () =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                // 等待 UI 完全稳定
-                await Task.Delay(350);
-
-                
                 // 将焦点还给主页
                 if (homeItem != null)
                 {
@@ -1115,9 +1111,6 @@ namespace WpfApp1
                     homeItem.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left) { RoutedEvent = Mouse.MouseUpEvent });
                     homeItem.IsSelected = true;
                 }
-                
-                // 再等一小会儿确保主页渲染完成
-                await Task.Delay(100);
 
                 // 隐藏加载遮罩层
                 if (this.FindName("LoadingOverlay") is Grid overlay && this.FindName("LoadingContent") is Grid content)
@@ -1125,8 +1118,8 @@ namespace WpfApp1
                     overlay.Visibility = Visibility.Collapsed;
                     content.Visibility = Visibility.Collapsed;
                 }
-                
-            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
         private static long ParseMemField(string text, string key)
