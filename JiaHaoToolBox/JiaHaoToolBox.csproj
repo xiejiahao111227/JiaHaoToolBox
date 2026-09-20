@@ -7,8 +7,8 @@
     <Product>嘉豪工具箱</Product>
     <Title>嘉豪工具箱</Title>
     <PackageId>JiaHaoToolBox</PackageId>
-    <Version>1.5.0</Version>
-    <InformationalVersion>1.5.0+OS1.0.5.0.UMNMIXM</InformationalVersion>
+    <Version>1.6.1</Version>
+    <InformationalVersion>1.6.1+OS1.0.6.1.UMNMIXM</InformationalVersion>
     <Company>JiaHaoToolBox</Company>
     <Copyright>Copyright © 2026 嘉豪工具箱 contributors. Based on VioletToolBox (c) 泡菜 / Smart-Paocai, licensed under GPL-3.0-or-later.</Copyright>
     <Nullable>enable</Nullable>

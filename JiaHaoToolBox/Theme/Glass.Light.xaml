@@ -10,7 +10,6 @@
     <SolidColorBrush x:Key="GlassWindowBorder" Color="#8CFFFFFF" />
     <SolidColorBrush x:Key="GlassTitleBar" Color="#30FFFFFF" />
     <SolidColorBrush x:Key="GlassNav" Color="#4CFFFFFF" />
-    <SolidColorBrush x:Key="GlassNavSelected" Color="#332E7CD6" />
     <SolidColorBrush x:Key="GlassDivider" Color="#26FFFFFF" />
     <SolidColorBrush x:Key="GlassField" Color="#70FFFFFF" />
 
@@ -69,5 +68,4 @@
     <SolidColorBrush x:Key="RegionBrush" Color="#F2FFFFFF" />
     <SolidColorBrush x:Key="SecondaryRegionBrush" Color="#E6F7FAFD" />
     <SolidColorBrush x:Key="ThirdlyRegionBrush" Color="#D9EAF1F8" />
-
 </ResourceDictionary>

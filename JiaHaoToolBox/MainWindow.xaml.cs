@@ -438,28 +438,7 @@ namespace WpfApp1
             if (e.Info is HandyControl.Controls.SideMenuItem item)
             {
                 ClearOtherSideMenuItemsSelection(item);
-
-                switch (item.Name)
-                {
-                    case "HomeButton": HomeButton_Click(this, null); break;
-                    case "ScreenMirrorButton": ScreenMirrorButton_Click(this, null); break;
-                    case "BasicFlashButton": BasicFlashButton_Click(this, null); break;
-                    case "FastbootVisualizationButton": FastbootVisualizationButton_Click(this, null); break;
-                    case "HiddenEnvironmentButton": HiddenEnvironmentButton_Click(this, null); break;
-                    case "SystemZoneButton": SystemZoneButton_Click(this, null); break;
-                    case "OugaFlashButton": OugaFlashButton_Click(this, null); break;
-                    case "AutorootButton": AutorootButton_Click(this, null); break;
-                    case "AppManagementButton": AppManagementButton_Click(this, null); break;
-                    case "AndroidGeneralButton": AndroidGeneralButton_Click(this, null); break;
-                    case "DownloadZoneButton": DownloadZoneButton_Click(this, null); break;
-                    case "PayloadButton": PayloadButton_Click(this, null); break;
-                    case "RomDownload": RomDownloadButton_Click(this, null); break;
-                    case "VioletDownload": VioletDownloadButton_Click(this, null); break;
-                    case "EdlFlashButton": EdlFlashButton_Click(this, null); break;
-                    case "ColorOSAssistantButton": ColorOSAssistantButton_Click(this, null); break;
-                    case "BackupAssistantButton": BackupAssistantButton_Click(this, null); break;
-                    case "AboutToolButton": AboutToolButton_Click(this, null); break;
-                }
+                InvokeNavByName(item.Name);
             }
         }
         
@@ -473,29 +452,37 @@ namespace WpfApp1
                 
                 // 设置当前项为选中状态，并触发选中事件
                 item.IsSelected = true;
-                
+
                 // 强制触发对应的视图切换
-                switch (item.Name)
-                {
-                    case "HomeButton": HomeButton_Click(this, null); break;
-                    case "ScreenMirrorButton": ScreenMirrorButton_Click(this, null); break;
-                    case "AboutToolButton": AboutToolButton_Click(this, null); break;
-                    case "BasicFlashButton": BasicFlashButton_Click(this, null); break;
-                    case "FastbootVisualizationButton": FastbootVisualizationButton_Click(this, null); break;
-                    case "OugaFlashButton": OugaFlashButton_Click(this, null); break;
-                    case "EdlFlashButton": EdlFlashButton_Click(this, null); break;
-                    case "ColorOSAssistantButton": ColorOSAssistantButton_Click(this, null); break;
-                    case "HiddenEnvironmentButton": HiddenEnvironmentButton_Click(this, null); break;
-                    case "SystemZoneButton": SystemZoneButton_Click(this, null); break;
-                    case "AutorootButton": AutorootButton_Click(this, null); break;
-                    case "AppManagementButton": AppManagementButton_Click(this, null); break;
-                    case "AndroidGeneralButton": AndroidGeneralButton_Click(this, null); break;
-                    case "PayloadButton": PayloadButton_Click(this, null); break;
-                    case "BackupAssistantButton": BackupAssistantButton_Click(this, null); break;
-                    case "DownloadZoneButton": DownloadZoneButton_Click(this, null); break;
-                    case "RomDownload": RomDownloadButton_Click(this, null); break;
-                    case "VioletDownload": VioletDownloadButton_Click(this, null); break;
-                }
+                InvokeNavByName(item.Name);
+            }
+        }
+
+        // 「导航元素名 -> 页面」的分发表：左栏的 SideMenu_SelectionChanged 与 DirectItem_PreviewMouseLeftButtonUp
+        // 都调它，页面切换逻辑一份都不重复。
+        private void InvokeNavByName(string navName)
+        {
+            switch (navName)
+            {
+                case "HomeButton": HomeButton_Click(this, null); break;
+                case "ScreenMirrorButton": ScreenMirrorButton_Click(this, null); break;
+                case "BasicFlashButton": BasicFlashButton_Click(this, null); break;
+                case "FastbootVisualizationButton": FastbootVisualizationButton_Click(this, null); break;
+                case "OugaFlashButton": OugaFlashButton_Click(this, null); break;
+                case "EdlFlashButton": EdlFlashButton_Click(this, null); break;
+                case "ColorOSAssistantButton": ColorOSAssistantButton_Click(this, null); break;
+                case "HiddenEnvironmentButton": HiddenEnvironmentButton_Click(this, null); break;
+                case "SystemZoneButton": SystemZoneButton_Click(this, null); break;
+                case "AutorootButton": AutorootButton_Click(this, null); break;
+                case "AppManagementButton": AppManagementButton_Click(this, null); break;
+                case "AndroidGeneralButton": AndroidGeneralButton_Click(this, null); break;
+                case "PayloadButton": PayloadButton_Click(this, null); break;
+                case "BackupAssistantButton": BackupAssistantButton_Click(this, null); break;
+                case "DownloadZoneButton": DownloadZoneButton_Click(this, null); break;
+                case "RomDownload": RomDownloadButton_Click(this, null); break;
+                case "VioletDownload": VioletDownloadButton_Click(this, null); break;
+                case "ToolSettingsButton": ToolSettingsButton_Click(this, null); break;
+                case "AboutToolButton": AboutToolButton_Click(this, null); break;
             }
         }
 
@@ -954,8 +941,11 @@ namespace WpfApp1
             // 初始化所有分区集合
             allPartitions = new ObservableCollection<PartitionInfo>();
             InitializeComponent();
-            RestoreGlassTheme();
+            InitializeGlassTheme();
+            GlassSettings.Current.ApplyToMotion();
             GlassMotion.RegisterGlobalButtonMotion();
+            GlassMotion.RegisterGlobalProgressBarMotion();
+            SyncInterfaceSettingToggles();
             allPartitions.CollectionChanged += AllPartitions_CollectionChanged;
             UpdatePartitionSelectionSummary();
             InitializeAutoRootModeUiState();
@@ -1025,6 +1015,9 @@ namespace WpfApp1
 
             // 初始化时显示首页视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -1802,6 +1795,9 @@ namespace WpfApp1
         {
             // 显示主页视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -1847,6 +1843,9 @@ namespace WpfApp1
         {
             // 显示投屏视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -1892,6 +1891,9 @@ namespace WpfApp1
         {
             // 显示基本刷入视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -1937,6 +1939,9 @@ namespace WpfApp1
         {
             // 显示Fastboot可视化视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -1984,6 +1989,9 @@ namespace WpfApp1
         private void DownloadZoneButton_Click(object sender, RoutedEventArgs e)
         {
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -2030,6 +2038,9 @@ namespace WpfApp1
         private void VioletDownloadButton_Click(object sender, RoutedEventArgs e)
         {
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -2075,6 +2086,9 @@ namespace WpfApp1
         {
             // 显示关于工具视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -2121,6 +2135,9 @@ namespace WpfApp1
         {
             // 显示一键ROOT视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -3609,6 +3626,9 @@ namespace WpfApp1
         {
             // 显示系统专区视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -3669,6 +3689,9 @@ namespace WpfApp1
         {
             // 显示应用管理视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -3718,6 +3741,9 @@ namespace WpfApp1
         {
             // 显示安卓常用视图，隐藏其他视图
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -3766,6 +3792,9 @@ namespace WpfApp1
         private void EdlFlashButton_Click(object sender, RoutedEventArgs e)
         {
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
+
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;
@@ -8170,10 +8199,28 @@ namespace WpfApp1
                             !string.IsNullOrWhiteSpace(connectionType) &&
                             connectionType != "--";
 
-            BottomConnectionStatusIndicator.Visibility = isOnline
+            // 检测过程刻意不改动任何文字（上游为了界面静默），所以底栏指示灯来当"在查"的信号：
+            // 设备检测开着又没连上就琥珀色呼吸，连上转绿色常亮并在刚插上时脉冲两下，关掉检测即收起。
+            bool detecting = !isOnline && _isDeviceDetectionEnabled;
+            BottomConnectionStatusIndicator.Visibility = isOnline || detecting
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+            if (!isOnline && !detecting)
+            {
+                GlassMotion.SetBreathe(BottomConnectionStatusIndicator, false);
+            }
+            else
+            {
+                var lampColor = isOnline ? System.Windows.Media.Color.FromRgb(125, 255, 159)
+                                         : System.Windows.Media.Color.FromRgb(255, 183, 77);
+                BottomConnectionStatusIndicator.Fill = new SolidColorBrush(lampColor);
+                if (isOnline && !bottomLampOnline) GlassMotion.Pulse(BottomConnectionStatusIndicator);
+                bottomLampOnline = isOnline;
+                GlassMotion.SetBreathe(BottomConnectionStatusIndicator, detecting);
+            }
         }
+
+        private bool bottomLampOnline;
         
         private string ExtractFastbootVar(string output, string varName)
         {

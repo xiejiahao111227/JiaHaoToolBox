@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- 流光/呼吸的离线判定台：只把产品的 GlassMotion.cs 编进来，自己造几条进度条，
+       用 RenderTargetBitmap 隔时采样比像素，证明「在推进才扫光、空闲和跑满都不扫」。
+       不进解决方案，单独 dotnet run 即可。 -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>ShimmerHarness</AssemblyName>
+    <RootNamespace>ShimmerHarness</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\JiaHaoToolBox\GlassMotion.cs" />
+  </ItemGroup>
+
+</Project>

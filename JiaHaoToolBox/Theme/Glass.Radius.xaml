@@ -1,0 +1,30 @@
+<!-- 圆角刻度：全站唯一的圆角来源，值全部在这里，页面里只写 {DynamicResource GlassRadiusN}。
+     单独一本字典放在语义画刷之前（App.xaml 索引 3），因为圆角跟配色是两回事：换深浅色字典时这本不动。 -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 外壳：窗口、标题栏、底栏 -->
+    <CornerRadius x:Key="GlassWindowRadius">20</CornerRadius>
+    <CornerRadius x:Key="GlassTitleBarRadius">20,20,0,0</CornerRadius>
+    <CornerRadius x:Key="GlassBottomBarRadius">0,0,20,20</CornerRadius>
+    <!-- 面板/卡片 -->
+    <CornerRadius x:Key="GlassCardRadius">16</CornerRadius>
+
+    <!-- 控件与装饰：编号即像素值 -->
+    <CornerRadius x:Key="GlassRadius3">3</CornerRadius>
+    <CornerRadius x:Key="GlassRadius4">4</CornerRadius>
+    <CornerRadius x:Key="GlassRadius5">5</CornerRadius>
+    <CornerRadius x:Key="GlassRadius6">6</CornerRadius>
+    <CornerRadius x:Key="GlassRadius7">7</CornerRadius>
+    <CornerRadius x:Key="GlassRadius8">8</CornerRadius>
+    <CornerRadius x:Key="GlassRadius9">9</CornerRadius>
+    <CornerRadius x:Key="GlassRadius10">10</CornerRadius>
+    <CornerRadius x:Key="GlassRadius11">11</CornerRadius>
+    <CornerRadius x:Key="GlassRadius12">12</CornerRadius>
+    <CornerRadius x:Key="GlassRadius14">14</CornerRadius>
+    <CornerRadius x:Key="GlassRadius16">16</CornerRadius>
+    <CornerRadius x:Key="GlassRadius21">21</CornerRadius>
+    <!-- 只圆左侧的半胶囊（分段控件的左半格） -->
+    <CornerRadius x:Key="GlassRadiusLeft10">0,10,10,0</CornerRadius>
+
+</ResourceDictionary>

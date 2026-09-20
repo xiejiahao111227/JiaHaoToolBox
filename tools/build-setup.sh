@@ -3,7 +3,7 @@
 # 用法: bash tools/build-setup.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
-Version="1.5.0"
+Version="1.6.1"
 SrcRoot="$(cygpath -w "$PWD")\\"
 Out="out"
 
@@ -19,6 +19,15 @@ fi
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/harvest-publish.ps1
 
 mkdir -p "$Out"
+
+# 许可页 RTF 里的版本号必须跟着安装包一起走：上一次就是只改了生成脚本没重跑，
+# 结果 V1.6 的安装包许可页上还写着「版本 1.2.0（测试版 V1.2）」。
+# 用 Node 而不是 PowerShell：本机 PowerShell 5.1 跑 tools/make-license-rtf.ps1 会在 AMSI 里段错误。
+if command -v node >/dev/null 2>&1; then
+    node tools/make-license-rtf.mjs
+else
+    echo "警告：PATH 里没有 node，setup/license.rtf 未重新生成，许可页版本可能与安装包不一致" >&2
+fi
 wix build setup/setup.wxs setup/files.wxs \
     -ext WixToolset.UI.wixext \
     -arch x64 \

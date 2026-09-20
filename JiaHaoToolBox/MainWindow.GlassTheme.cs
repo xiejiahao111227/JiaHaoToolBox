@@ -1,49 +1,46 @@
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Application = System.Windows.Application;
-using Path = System.IO.Path;
 
 namespace WpfApp1
 {
-    // 液态玻璃主题的浅色/深色切换：整本替换 App.xaml 里最后一本语义画刷字典。
-    // 它排在 HandyControl 主题之后，因此除了自定义的 Glass* 键，还覆盖了 RegionBrush、
+    // 语义画刷字典的整本替换：App.xaml 里最后一本可以是浅色玻璃或深色玻璃。
+    // 它排在 HandyControl 主题之后，因此除了自定义的 Glass* 键，玻璃这两本还覆盖了 RegionBrush、
     // PrimaryTextBrush 等 HandyControl 画刷键——HandyControl 的画刷是冻结的，改颜色键没用，
     // 只能整本换掉画刷本身，ComboBox、SideMenu 这类控件才会跟着换色。
     public partial class MainWindow
     {
-        private const int GlassThemeDictionaryIndex = 3;
+        // App.xaml 里最后一本：前面依次是 Icons、HandyControl 的 SkinDefault 与 Theme、圆角刻度字典
+        private const int GlassThemeDictionaryIndex = 4;
         private const string GlassThemeLightSource = "Theme/Glass.Light.xaml";
         private const string GlassThemeDarkSource = "Theme/Glass.Dark.xaml";
 
-        private static string GlassThemePreferenceFile => Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "JiaHaoTool",
-            "theme.txt");
-
-        private bool IsGlassThemeDark
-        {
-            get
-            {
-                var merged = Application.Current.Resources.MergedDictionaries;
-                if (merged.Count <= GlassThemeDictionaryIndex) return false;
-                return (merged[GlassThemeDictionaryIndex].Source?.OriginalString ?? "")
-                    .EndsWith("Glass.Dark.xaml", StringComparison.OrdinalIgnoreCase);
-            }
-        }
-
-        private void ApplyGlassTheme(bool dark)
+        // App.OnStartup 在建主窗口之前调用，避免启动瞬间先闪一套别的配色。
+        public static void ApplyThemeDictionary(GlassSettings settings)
         {
             var merged = Application.Current.Resources.MergedDictionaries;
             if (merged.Count <= GlassThemeDictionaryIndex) return;
             merged[GlassThemeDictionaryIndex] = new ResourceDictionary
             {
-                Source = new Uri("pack://application:,,,/" + (dark ? GlassThemeDarkSource : GlassThemeLightSource), UriKind.Absolute)
+                Source = new Uri("pack://application:,,,/" +
+                    (settings.Dark ? GlassThemeDarkSource : GlassThemeLightSource), UriKind.Absolute)
             };
+        }
+
+        private void ApplyGlassTheme()
+        {
+            ApplyThemeDictionary(GlassSettings.Current);
             StartGlassBackdropDrift();
-            UpdateGlassThemeToggle(dark);
+            UpdateGlassThemeToggle();
+        }
+
+        // 构造函数里调用：字典已由 App.OnStartup 换好，这里只补光斑动画与按钮图形。
+        private void InitializeGlassTheme()
+        {
+            StartGlassBackdropDrift();
+            UpdateGlassThemeToggle();
         }
 
         // 背景光斑缓慢漂移 + 指针视差：字典会把塞进来的 Freezable 冻结掉，所以先在克隆体上起好动画
@@ -51,6 +48,13 @@ namespace WpfApp1
         // 位移挂在 RelativeTransform 上而不是 Transform：后者是绝对像素，零点几根本看不出来。
         private void StartGlassBackdropDrift()
         {
+            var s = GlassSettings.Current;
+            if (!s.Motion || !s.MotionBackdrop)
+            {
+                GlassMotion.UnbindBackdropParallax();
+                return;
+            }
+
             var merged = Application.Current.Resources.MergedDictionaries;
             if (merged.Count <= GlassThemeDictionaryIndex) return;
             var dict = merged[GlassThemeDictionaryIndex];
@@ -80,8 +84,9 @@ namespace WpfApp1
             GlassMotion.BindBackdropParallax(MainContentBorder, parallax);
         }
 
-        private void UpdateGlassThemeToggle(bool dark)
+        private void UpdateGlassThemeToggle()
         {
+            bool dark = GlassSettings.Current.Dark;
             if (GlassThemeToggleGlyph != null)
             {
                 GlassThemeToggleGlyph.Text = dark ? "\uE706" : "\uE708";
@@ -91,37 +96,13 @@ namespace WpfApp1
                 GlassThemeToggleButton.ToolTip = dark ? "切换到浅色玻璃主题" : "切换到深色玻璃主题";
         }
 
-        // 构造函数里调用，早于窗口绘制，避免启动时闪一下另一种配色
-        private void RestoreGlassTheme()
-        {
-            bool dark = false;
-            try
-            {
-                dark = string.Equals(File.ReadAllText(GlassThemePreferenceFile).Trim(), "Dark", StringComparison.OrdinalIgnoreCase);
-            }
-            catch
-            {
-                // 偏好读不到就用默认浅色
-            }
-            if (dark) ApplyGlassTheme(true);
-            else StartGlassBackdropDrift();
-        }
-
         private void GlassThemeToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            bool dark = !IsGlassThemeDark;
-            ApplyGlassTheme(dark);
+            GlassSettings.Current.Dark = !GlassSettings.Current.Dark;
+            GlassSettings.Current.Save();
+            ApplyGlassTheme();
             GlassMotion.FadeIn(MainContentBorder);
-            try
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(GlassThemePreferenceFile));
-                File.WriteAllText(GlassThemePreferenceFile, dark ? "Dark" : "Light");
-            }
-            catch
-            {
-                // 写不进偏好不影响本次切换
-            }
-            AddLogMessage("系统", dark ? "已切换到深色玻璃主题" : "已切换到浅色玻璃主题");
+            AddLogMessage("系统", GlassSettings.Current.Dark ? "已切换到深色玻璃主题" : "已切换到浅色玻璃主题");
         }
     }
 }

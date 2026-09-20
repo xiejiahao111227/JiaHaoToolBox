@@ -11,6 +11,13 @@ public class PG{
 }
 "@
 function Say([string]$m) { [Console]::Out.WriteLine($m) }
+# 漂移只在「玻璃 + 动效」都开着时才有；关掉动效必须能证明两帧完全一致，所以这里直接预设偏好
+$prefDir = Join-Path $env:LOCALAPPDATA 'JiaHaoTool'
+$pref = Join-Path $prefDir 'settings.txt'
+if (-not (Test-Path $prefDir)) { New-Item -ItemType Directory -Path $prefDir -Force | Out-Null }
+$mo = if ($Motion) { $Motion } else { '1' }
+Set-Content -Path $pref -Value ("theme=Light`r`nmotion=$mo") -Encoding UTF8 -NoNewline
+Say ("预设 motion=$mo")
 $p = Start-Process -FilePath $Exe -PassThru
 $deadline = (Get-Date).AddSeconds(60); $hwnd = [IntPtr]::Zero
 while ((Get-Date) -lt $deadline) {
@@ -41,6 +48,8 @@ for ($y = 560; $y -lt 740; $y += 2) {
     }
 }
 $total = ((740 - 560) / 2) * ((960 - 640) / 2)
-Say ("采样 $total 点：有变化 $diff 点，明显变化(>6) $moved 点")
+$verdict = if ($mo -eq '1') { if ($moved -gt 0) { 'OK 光斑在漂' } else { 'FAIL 该漂没漂' } }
+           elseif ($diff -eq 0) { 'OK 两帧完全一致' } else { 'FAIL 关了动效还在动' }
+Say ("采样 $total 点：有变化 $diff 点，明显变化(>6) $moved 点 -> $verdict")
 $a.Dispose(); $b.Dispose()
 Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue

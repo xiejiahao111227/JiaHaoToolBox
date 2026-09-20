@@ -21,7 +21,7 @@
     RenderOptions.BitmapScalingMode="HighQuality">
     <Border
         Background="#FFFFFFFF"
-        CornerRadius="20"
+        CornerRadius="{DynamicResource GlassWindowRadius}"
         BorderThickness="1"
         BorderBrush="#E0E0E0"
         x:Name="MainContentBorder"
@@ -43,7 +43,7 @@
                 Height="30"
                 VerticalAlignment="Top"
                 Background="#FF4A90E2"
-                CornerRadius="20,20,0,0"
+                CornerRadius="{DynamicResource GlassTitleBarRadius}"
                 MouseLeftButtonDown="Border_MouseLeftButtonDown" Grid.ColumnSpan="2" Margin="0,0,200,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -81,7 +81,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource GlassRadius3}">
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                             </Border>
                                             <ControlTemplate.Triggers>
@@ -114,7 +114,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource GlassRadius3}">
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                             </Border>
                                             <ControlTemplate.Triggers>
@@ -128,7 +128,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="正式版 V1.5  OS1.0.5.0.UMNMIXM" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="23,7,0,0" TextWrapping="Wrap" Text="正式版 V1.6.1  OS1.0.6.1.UMNMIXM" VerticalAlignment="Top" Foreground="White"/>
                 </Grid>
             </Border>
             <!-- 预留内容区，保持空白 -->

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>uiaprobe</AssemblyName>
+    <RootNamespace>UiaProbe</RootNamespace>
+    <!-- 本机 PowerShell 5.1 送 AMSI 扫描时随机段错误，UI 巡检改用这个自编译的小工具，不再依赖 ps -->
+    <Description>驱动嘉豪工具箱做 UI 巡检：启动/截图/控件树/点按钮/读窗口样式位</Description>
+  </PropertyGroup>
+
+</Project>

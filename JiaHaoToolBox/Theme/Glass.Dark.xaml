@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="GlassWindowBorder" Color="#40FFFFFF" />
     <SolidColorBrush x:Key="GlassTitleBar" Color="#1AFFFFFF" />
     <SolidColorBrush x:Key="GlassNav" Color="#26FFFFFF" />
-    <SolidColorBrush x:Key="GlassNavSelected" Color="#406FB4FF" />
     <SolidColorBrush x:Key="GlassDivider" Color="#1FFFFFFF" />
     <!-- 输入框在深色下用暗色薄纱，避免近白文字压在浅色块上 -->
     <SolidColorBrush x:Key="GlassField" Color="#4007111C" />
@@ -68,5 +67,4 @@
     <SolidColorBrush x:Key="RegionBrush" Color="#F218222E" />
     <SolidColorBrush x:Key="SecondaryRegionBrush" Color="#E6202C3A" />
     <SolidColorBrush x:Key="ThirdlyRegionBrush" Color="#D92A3A4D" />
-
 </ResourceDictionary>

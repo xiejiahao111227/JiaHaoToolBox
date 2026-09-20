@@ -52,6 +52,8 @@ namespace WpfApp1
         private void ColorOSAssistantButton_Click(object sender, RoutedEventArgs e)
         {
             var homeView = this.FindName("HomeView") as Grid;
+            var toolSettingsView = this.FindName("ToolSettingsView") as Grid;
+            if (toolSettingsView != null) toolSettingsView.Visibility = Visibility.Collapsed;
             var screenMirrorView = this.FindName("ScreenMirrorView") as Grid;
             var basicFlashView = this.FindName("BasicFlashView") as Grid;
             var fastbootVisualizationView = this.FindName("FastbootVisualizationView") as Grid;

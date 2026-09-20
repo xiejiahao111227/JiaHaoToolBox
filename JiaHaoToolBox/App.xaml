@@ -10,9 +10,11 @@
                 <ResourceDictionary Source="Icons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                <!-- 圆角刻度：全站唯一的圆角来源，语义画刷字典不动它 -->
+                <ResourceDictionary Source="Theme/Glass.Radius.xaml"/>
                 <!-- 液态玻璃语义画刷必须放最后一本：HandyControl 的画刷是后加入者胜出，
                      这里同时覆盖它的 RegionColor/PrimaryTextColor 等颜色键，ComboBox、SideMenu 等控件才会跟着换色。
-                     GlassTheme.cs 按索引 3 整本替换实现深浅色切换，位置不能挪。 -->
+                     GlassTheme.cs 按索引 4 整本替换实现浅/深色切换，位置不能挪。 -->
                 <ResourceDictionary Source="Theme/Glass.Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
